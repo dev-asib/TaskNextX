@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:task_next_x/app/utils/size_config.dart';
+import 'package:task_next_x/app/widgets/background_widget.dart';
+import 'package:task_next_x/resources/constants/assets_paths.dart';
+import 'package:get/get.dart';
+import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -8,12 +14,34 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  Future<void> _moveToNextView() async {
+    Future.delayed(
+      const Duration(seconds: 3),
+          () => Get.offNamed(RoutesName.signInView),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _moveToNextView();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Splash View"),
+      body: BackgroundWidget(
+        child: Center(
+          child: _buildAppLogo(),
+        ),
       ),
+    );
+  }
+
+  Widget _buildAppLogo() {
+    return SvgPicture.asset(
+      AssetsPaths.taskNextXSvg,
+      width: SizeConfig.screenWidth! * 0.43,
     );
   }
 }
