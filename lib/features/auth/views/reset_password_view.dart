@@ -4,20 +4,20 @@ import 'package:task_next_x/app/utils/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/features/auth/widgets/auth_footer_widget.dart';
 import 'package:task_next_x/features/auth/widgets/auth_header_widget.dart';
-import 'package:task_next_x/features/auth/widgets/email_text_form_field_widget.dart';
 import 'package:task_next_x/features/auth/widgets/password_text_form_field_widget.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
-class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+class ResetPasswordView extends StatefulWidget {
+  const ResetPasswordView({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
+  State<ResetPasswordView> createState() => _ResetPasswordViewState();
 }
 
-class _SignInViewState extends State<SignInView> {
-  final TextEditingController _emailTEController = TextEditingController();
+class _ResetPasswordViewState extends State<ResetPasswordView> {
   final TextEditingController _passwordTEController = TextEditingController();
+  final TextEditingController _confirmPasswordTEController =
+      TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -35,30 +35,40 @@ class _SignInViewState extends State<SignInView> {
                 child: Column(
                   children: [
                     SizedBox(height: SizeConfig.screenHeight! * 0.12),
-                    const AuthHeaderWidget(title: "Get Started With"),
-                    SizedBox(height: SizeConfig.screenHeight! * 0.03),
-                    EmailTextFormFieldWidget(
-                      emailTEController: _emailTEController,
-                      validator: (String? value) {},
+                    const AuthHeaderWidget(
+                      title: "Set Password",
+                      subTitle:
+                          "Minimum length of password should be more than 6 letters and combination of letters and numbers",
                     ),
-                    SizedBox(height: SizeConfig.screenHeight! * 0.01),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.03),
                     PasswordTextFormFieldWidget(
                       passwordTEController: _passwordTEController,
                       hintText: "Password",
                       labelText: "Password",
                       validator: (String? value) {},
                     ),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.01),
+                    PasswordTextFormFieldWidget(
+                      passwordTEController: _confirmPasswordTEController,
+                      hintText: "Confirm password",
+                      labelText: "Confirm password",
+                      validator: (String? value) {},
+                    ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.02),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          _onTapSignInButton();
+                          _onTapConfirmButton();
                         }
                       },
-                      child: const Icon(Icons.arrow_circle_right_outlined),
+                      child: const Text("Confirm"),
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.04),
-                    _signInFooter(context)
+                    AuthFooterWidget(
+                      promptText: 'Have an account?\t',
+                      actionText: 'Sign In',
+                      onTap: _onTapSignInButton,
+                    ),
                   ],
                 ),
               ),
@@ -69,38 +79,18 @@ class _SignInViewState extends State<SignInView> {
     );
   }
 
-  Widget _signInFooter(BuildContext context) {
-    return Column(
-      children: [
-        TextButton(
-          onPressed: _onTapForgotPasswordButton,
-          child: const Text("Forgot Password?"),
-        ),
-        AuthFooterWidget(
-          promptText: 'Don\' have an account?\t',
-          actionText: 'Sign Up',
-          onTap: _onTapSignUpButton,
-        ),
-      ],
-    );
-  }
-
-  _onTapSignUpButton() {
-    Get.toNamed(RoutesName.signUpView);
-  }
-
-  _onTapForgotPasswordButton() {
-    Get.toNamed(RoutesName.emailVerificationView);
+  _onTapConfirmButton() {
+    Get.toNamed(RoutesName.signInView);
   }
 
   _onTapSignInButton() {
-    /// Handle SignIn button logic
+    Get.toNamed(RoutesName.signInView);
   }
 
   @override
   void dispose() {
-    _emailTEController.dispose();
     _passwordTEController.dispose();
+    _confirmPasswordTEController.dispose();
     super.dispose();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/features/auth/views/email_verification_view.dart';
-import 'package:task_next_x/features/auth/views/otp_verification_view.dart';
-import 'package:task_next_x/features/auth/views/set_password_view.dart';
+import 'package:task_next_x/features/auth/views/pin_verification_view.dart';
+import 'package:task_next_x/features/auth/views/reset_password_view.dart';
 import 'package:task_next_x/features/auth/views/sign_in_view.dart';
 import 'package:task_next_x/features/auth/views/sign_up_view.dart';
 import 'package:task_next_x/features/auth/views/splash_view.dart';
@@ -23,8 +23,8 @@ class AppRoutes {
       _getPage(routeName: RoutesName.signUpView, page: const SignUpView()),
       _getPage(routeName: RoutesName.signInView, page: const SignInView()),
       _getPage(routeName: RoutesName.emailVerificationView, page: const EmailVerificationView()),
-      _getPage(routeName: RoutesName.otpVerificationView, page: const OTPVerificationView()),
-      _getPage(routeName: RoutesName.setPasswordView, page: const SetPasswordView()),
+      _getPage(routeName: RoutesName.pinVerificationView, page: const PinVerificationView()),
+      _getPage(routeName: RoutesName.resetPasswordView, page: const ResetPasswordView()),
 
       /// Task Routes
       _getPage(routeName: RoutesName.newTaskListView, page: const NewTaskListView()),

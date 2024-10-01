@@ -34,6 +34,10 @@ class LightShadeAppThemes {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
+        textStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
+        ),
       ),
     );
   }
@@ -54,7 +58,11 @@ class LightShadeAppThemes {
       bodyLarge: TextStyle(
         fontWeight: FontWeight.w600,
         letterSpacing: 0.4,
-        color: LightShadeAppColors.richTextColor,
+        color: LightShadeAppColors.bodyLargeTextColor,
+      ),
+      titleMedium: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: LightShadeAppColors.titleMediumTextColor,
       ),
     );
   }
@@ -74,6 +82,10 @@ class LightShadeAppThemes {
       suffixIconColor: LightShadeAppColors.themeColor,
       hintStyle: const TextStyle(
         color: LightShadeAppColors.textFormFieldHintTextColor,
+        fontWeight: FontWeight.bold,
+      ),
+      labelStyle: const TextStyle(
+        color: LightShadeAppColors.textFormFieldLabelTextColor,
         fontWeight: FontWeight.bold,
       ),
       border: _outlineInputBorder(),

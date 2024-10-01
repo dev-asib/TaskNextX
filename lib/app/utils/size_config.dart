@@ -4,7 +4,6 @@ class SizeConfig {
   static MediaQueryData? _mediaQueryData;
   static double? screenWidth;
   static double? screenHeight;
-  static TextTheme? textTheme;
 
   void init(BuildContext context) {
     if (context.mounted) {
@@ -13,7 +12,6 @@ class SizeConfig {
       debugPrint(screenWidth.toString());
       screenHeight = _mediaQueryData!.size.height;
       debugPrint(screenHeight.toString());
-      textTheme = Theme.of(context).textTheme;
     }
   }
 }

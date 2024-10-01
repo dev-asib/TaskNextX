@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_next_x/app/utils/size_config.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
 
@@ -18,14 +17,16 @@ class AuthFooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final bool isLightTheme = Theme.of(context).brightness == Brightness.light;
     return RichText(
       text: TextSpan(
-        style: SizeConfig.textTheme?.bodyLarge,
+        style: textTheme.bodyLarge,
         text: promptText,
         children: [
           TextSpan(
-            style: SizeConfig.textTheme?.bodyLarge?.copyWith(
-              color: Theme.of(context).brightness == Brightness.light
+            style: textTheme.bodyLarge?.copyWith(
+              color: isLightTheme
                   ? LightShadeAppColors.themeColor
                   : DarkShadeAppColors.themeColor,
             ),

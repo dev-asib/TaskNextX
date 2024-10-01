@@ -34,6 +34,10 @@ class DarkShadeAppThemes {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
+        textStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
+        ),
       ),
     );
   }
@@ -54,7 +58,12 @@ class DarkShadeAppThemes {
       bodyLarge: TextStyle(
         fontWeight: FontWeight.w600,
         letterSpacing: 0.4,
-        color: DarkShadeAppColors.richTextColor,
+        color: DarkShadeAppColors.bodyLargeTextColor,
+      ),
+      titleMedium: const TextStyle(
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.4,
+        color: DarkShadeAppColors.titleMediumTextColor,
       ),
     );
   }
@@ -74,6 +83,10 @@ class DarkShadeAppThemes {
       suffixIconColor: DarkShadeAppColors.themeColor,
       hintStyle: const TextStyle(
         color: DarkShadeAppColors.textFormFieldHintTextColor,
+        fontWeight: FontWeight.bold,
+      ),
+      labelStyle: const TextStyle(
+        color: DarkShadeAppColors.textFormFieldLabelTextColor,
         fontWeight: FontWeight.bold,
       ),
       border: _outlineInputBorder(),
