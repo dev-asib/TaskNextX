@@ -17,7 +17,7 @@ class _SplashViewState extends State<SplashView> {
   Future<void> _moveToNextView() async {
     Future.delayed(
       const Duration(seconds: 3),
-          () => Get.offNamed(RoutesName.signInView),
+          () => Get.offAllNamed(RoutesName.signInView),
     );
   }
 

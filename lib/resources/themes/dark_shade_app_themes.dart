@@ -4,12 +4,75 @@ import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors
 class DarkShadeAppThemes {
   ThemeData darkThemeData() {
     return ThemeData(
-      scaffoldBackgroundColor: DarkShadeAppColors.scaffoldBackgroundColor,
+      scaffoldBackgroundColor: DarkShadeAppColors.primaryScaffoldBackgroundColor,
       appBarTheme: _appBarTheme(),
       inputDecorationTheme: _inputDecorationTheme(),
       textTheme: _textTheme(),
       elevatedButtonTheme: _elevatedButtonThemeData(),
       textButtonTheme: _textButtonThemeData(),
+      navigationBarTheme: _navigationBarThemeData(),
+      chipTheme: _chipThemeData(),
+      listTileTheme: _listTileThemeData(),
+      floatingActionButtonTheme: _floatingActionButtonThemeData(),
+    );
+  }
+
+  FloatingActionButtonThemeData _floatingActionButtonThemeData(){
+    return  FloatingActionButtonThemeData(
+      elevation: 4,
+      backgroundColor: DarkShadeAppColors.floatingActionButtonBackgroundColor,
+      foregroundColor: DarkShadeAppColors.floatingActionButtonForegroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      iconSize: 30,
+    );
+  }
+
+  ListTileThemeData _listTileThemeData() {
+    return ListTileThemeData(
+      titleTextStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: DarkShadeAppColors.listTileTitleTextColor,
+        fontSize: 18,
+      ),
+      subtitleTextStyle: TextStyle(
+        color: DarkShadeAppColors.listTileSubTitleTextColor,
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  ChipThemeData _chipThemeData() {
+    return ChipThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      backgroundColor: DarkShadeAppColors.chipBackgroundColor,
+      labelStyle: const TextStyle(
+        color: DarkShadeAppColors.chipTextColor,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  NavigationBarThemeData _navigationBarThemeData() {
+    return NavigationBarThemeData(
+      backgroundColor: DarkShadeAppColors.navigationBarBackgroundColor,
+      indicatorColor: DarkShadeAppColors.navigationBarIndicatorColor,
+      labelTextStyle: WidgetStateProperty.all(
+        const TextStyle(
+          color: DarkShadeAppColors.navigationBarLabelTextColor,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      iconTheme: WidgetStateProperty.all(
+        const IconThemeData(
+          color: DarkShadeAppColors.navigationBarIconColor,
+        ),
+      ),
     );
   }
 
@@ -69,9 +132,9 @@ class DarkShadeAppThemes {
   }
 
   AppBarTheme _appBarTheme() {
-    return const AppBarTheme(
+    return AppBarTheme(
       backgroundColor: DarkShadeAppColors.themeColor,
-      foregroundColor: Colors.white,
+      foregroundColor: DarkShadeAppColors.appBarForegroundColor,
     );
   }
 

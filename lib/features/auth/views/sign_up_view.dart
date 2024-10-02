@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/app/utils/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
-import 'package:task_next_x/features/auth/widgets/auth_footer_widget.dart';
+import 'package:task_next_x/app/widgets/auth_footer_widget.dart';
+import 'package:task_next_x/app/widgets/email_text_form_field_widget.dart';
+import 'package:task_next_x/app/widgets/mobile_text_form_field_widget.dart';
+import 'package:task_next_x/app/widgets/password_text_form_field_widget.dart';
 import 'package:task_next_x/features/auth/widgets/auth_header_widget.dart';
-import 'package:task_next_x/features/auth/widgets/email_text_form_field_widget.dart';
-import 'package:task_next_x/features/auth/widgets/mobile_text_form_field_widget.dart';
-import 'package:task_next_x/features/auth/widgets/name_text_form_field_widget.dart';
-import 'package:task_next_x/features/auth/widgets/password_text_form_field_widget.dart';
+import 'package:task_next_x/app/widgets/name_text_form_field_widget.dart';
+import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
+import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
 class SignUpView extends StatefulWidget {
@@ -28,8 +30,12 @@ class _SignUpViewState extends State<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isBrightness = Theme.of(context).brightness == Brightness.light;
     return BackgroundWidget(
       child: Scaffold(
+        backgroundColor: isBrightness
+            ? LightShadeAppColors.secondaryScaffoldBackgroundColor
+            : DarkShadeAppColors.secondaryScaffoldBackgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(

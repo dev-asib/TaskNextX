@@ -9,6 +9,7 @@ import 'package:task_next_x/features/auth/views/splash_view.dart';
 import 'package:task_next_x/features/not_found/views/not_found_view.dart';
 import 'package:task_next_x/features/profile/views/update_profile_view.dart';
 import 'package:task_next_x/features/tasks/views/add_new_task_view.dart';
+import 'package:task_next_x/features/tasks/views/bottom_nav_main_view.dart';
 import 'package:task_next_x/features/tasks/views/cancelled_task_list_view.dart';
 import 'package:task_next_x/features/tasks/views/completed_task_list_view.dart';
 import 'package:task_next_x/features/tasks/views/in_progress_task_list_view.dart';
@@ -27,6 +28,7 @@ class AppRoutes {
       _getPage(routeName: RoutesName.resetPasswordView, page: const ResetPasswordView()),
 
       /// Task Routes
+      _getPage(routeName: RoutesName.bottomNavMainView, page: const BottomNavMainView()),
       _getPage(routeName: RoutesName.newTaskListView, page: const NewTaskListView()),
       _getPage(routeName: RoutesName.completedTaskListView, page: const CompletedTaskListView()),
       _getPage(routeName: RoutesName.cancelledTaskListView, page: const CancelledTaskListView()),

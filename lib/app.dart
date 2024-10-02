@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_next_x/app/bindings/all_bindings.dart';
 import 'package:task_next_x/app/utils/size_config.dart';
 import 'package:task_next_x/resources/constants/routes/app_routes.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
@@ -13,6 +14,7 @@ class TaskNextX extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return GetMaterialApp(
+      initialBinding: AllBindings(),
       initialRoute: RoutesName.splashView,
       getPages: AppRoutes.appRoutes(),
       unknownRoute: AppRoutes.unknownRoute(),

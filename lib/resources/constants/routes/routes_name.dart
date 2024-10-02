@@ -8,6 +8,7 @@ class RoutesName {
   static const resetPasswordView = '/reset_password_view';
 
   ///Routes name for tasks view
+  static const bottomNavMainView = '/bottom_nav_main_view';
   static const newTaskListView = '/new_task_list_view';
   static const completedTaskListView = '/completed_task_list_view';
   static const cancelledTaskListView = '/cancelled_task_list_view';

@@ -4,19 +4,82 @@ import 'package:task_next_x/resources/constants/app_colors/light_shade_app_color
 class LightShadeAppThemes {
   ThemeData lightThemeData() {
     return ThemeData(
-      scaffoldBackgroundColor: LightShadeAppColors.scaffoldBackgroundColor,
+      scaffoldBackgroundColor: LightShadeAppColors.primaryScaffoldBackgroundColor,
       appBarTheme: _appBarTheme(),
       inputDecorationTheme: _inputDecorationTheme(),
       textTheme: _textTheme(),
       elevatedButtonTheme: _elevatedButtonThemeData(),
       textButtonTheme: _textButtonThemeData(),
+      navigationBarTheme: _navigationBarThemeData(),
+      chipTheme: _chipThemeData(),
+      listTileTheme: _listTileThemeData(),
+      floatingActionButtonTheme: _floatingActionButtonThemeData(),
+    );
+  }
+
+  FloatingActionButtonThemeData _floatingActionButtonThemeData(){
+    return  FloatingActionButtonThemeData(
+      elevation: 4,
+      backgroundColor: LightShadeAppColors.floatingActionButtonBackgroundColor,
+      foregroundColor: LightShadeAppColors.floatingActionButtonForegroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      iconSize: 30,
+    );
+  }
+
+  ListTileThemeData _listTileThemeData() {
+    return ListTileThemeData(
+      titleTextStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: LightShadeAppColors.listTileTitleTextColor,
+        fontSize: 18,
+      ),
+      subtitleTextStyle: TextStyle(
+        color: LightShadeAppColors.listTileSubTitleTextColor,
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  ChipThemeData _chipThemeData() {
+    return ChipThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      backgroundColor: LightShadeAppColors.chipBackgroundColor,
+      labelStyle: const TextStyle(
+        color: LightShadeAppColors.chipTextColor,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  NavigationBarThemeData _navigationBarThemeData() {
+    return NavigationBarThemeData(
+      backgroundColor: LightShadeAppColors.navigationBarBackgroundColor,
+      indicatorColor: LightShadeAppColors.navigationBarIndicatorColor,
+      labelTextStyle: WidgetStateProperty.all(
+        const TextStyle(
+          color: LightShadeAppColors.navigationBarLabelTextColor,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      iconTheme: WidgetStateProperty.all(
+        const IconThemeData(
+          color: LightShadeAppColors.navigationBarIconColor,
+        ),
+      ),
     );
   }
 
   TextButtonThemeData _textButtonThemeData() {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: LightShadeAppColors.grey,
+        foregroundColor: LightShadeAppColors.greyColor,
         textStyle: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
@@ -28,7 +91,7 @@ class LightShadeAppThemes {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: LightShadeAppColors.themeColor,
-        foregroundColor: LightShadeAppColors.white,
+        foregroundColor: LightShadeAppColors.whiteColor,
         padding: const EdgeInsets.symmetric(vertical: 12),
         fixedSize: const Size.fromWidth(double.maxFinite),
         shape: RoundedRectangleBorder(
@@ -68,9 +131,9 @@ class LightShadeAppThemes {
   }
 
   AppBarTheme _appBarTheme() {
-    return const AppBarTheme(
+    return AppBarTheme(
       backgroundColor: LightShadeAppColors.themeColor,
-      foregroundColor: Colors.white,
+      foregroundColor: LightShadeAppColors.appBarForegroundColor,
     );
   }
 
