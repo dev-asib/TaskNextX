@@ -19,21 +19,24 @@ class AuthFooterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final bool isLightTheme = Theme.of(context).brightness == Brightness.light;
-    return RichText(
-      text: TextSpan(
-        style: textTheme.bodyLarge,
-        text: promptText,
-        children: [
-          TextSpan(
-            style: textTheme.bodyLarge?.copyWith(
-              color: isLightTheme
-                  ? LightShadeAppColors.themeColor
-                  : DarkShadeAppColors.themeColor,
+    return Align(
+      alignment: Alignment.center,
+      child: RichText(
+        text: TextSpan(
+          style: textTheme.bodyLarge,
+          text: promptText,
+          children: [
+            TextSpan(
+              style: textTheme.bodyLarge?.copyWith(
+                color: isLightTheme
+                    ? LightShadeAppColors.themeColor
+                    : DarkShadeAppColors.themeColor,
+              ),
+              text: actionText,
+              recognizer: TapGestureRecognizer()..onTap = onTap,
             ),
-            text: actionText,
-            recognizer: TapGestureRecognizer()..onTap = onTap,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

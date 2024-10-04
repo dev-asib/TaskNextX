@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_next_x/app/utils/size_config.dart';
+import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/app/widgets/auth_footer_widget.dart';
 import 'package:task_next_x/app/widgets/email_text_form_field_widget.dart';
-import 'package:task_next_x/features/auth/widgets/auth_header_widget.dart';
+import 'package:task_next_x/app/widgets/auth_header_widget.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
@@ -47,7 +47,6 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
                     SizedBox(height: SizeConfig.screenHeight! * 0.03),
                     EmailTextFormFieldWidget(
                       emailTEController: _emailTEController,
-                      validator: (String? value) {},
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.02),
                     ElevatedButton(

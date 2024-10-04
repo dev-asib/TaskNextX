@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/app/bindings/all_bindings.dart';
-import 'package:task_next_x/app/utils/size_config.dart';
+import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/resources/constants/routes/app_routes.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 import 'package:task_next_x/resources/themes/dark_shade_app_themes.dart';

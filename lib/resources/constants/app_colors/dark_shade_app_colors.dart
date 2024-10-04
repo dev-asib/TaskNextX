@@ -62,4 +62,9 @@ class DarkShadeAppColors {
   /// Colors for floating action button
   static const Color floatingActionButtonBackgroundColor = Colors.green;
   static const Color floatingActionButtonForegroundColor = Colors.white;
+
+  /// Colors. for another flush bar
+  static const Color anotherFlushBarTitleColor = Colors.white;
+  static const Color anotherFlushBarMessageColor = Colors.white;
+  static const Color anotherFlushBackgroundColor = Colors.green;
 }

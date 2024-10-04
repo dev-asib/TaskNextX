@@ -46,7 +46,6 @@ class AppRoutes {
     return GetPage(
       name: routeName,
       page: () => page,
-      transitionDuration: const Duration(seconds: 3),
       transition: Transition.leftToRightWithFade,
     );
   }
@@ -56,7 +55,6 @@ class AppRoutes {
     return GetPage(
       name: RoutesName.notFoundView,
       page: () => const NotFoundView(),
-      transitionDuration: const Duration(seconds: 3),
       transition: Transition.leftToRightWithFade,
     );
   }

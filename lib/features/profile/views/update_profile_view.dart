@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:task_next_x/app/utils/size_config.dart';
+import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/app/widgets/email_text_form_field_widget.dart';
 import 'package:task_next_x/app/widgets/mobile_text_form_field_widget.dart';
-import 'package:task_next_x/features/auth/widgets/auth_header_widget.dart';
+import 'package:task_next_x/app/widgets/auth_header_widget.dart';
 import 'package:task_next_x/app/widgets/name_text_form_field_widget.dart';
 import 'package:task_next_x/app/widgets/password_text_form_field_widget.dart';
 import 'package:task_next_x/features/profile/widgets/photo_picker_widget.dart';
@@ -53,31 +53,33 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                     SizedBox(height: SizeConfig.screenHeight! * 0.01),
                     NameTextFormFieldWidget(
                         nameTEController: _firstNameTEController,
-                        validator: (String? value) {},
                         labelText: "First name",
-                        hintText: "First name"),
+                        hintText: "First name",
+                        emptyErrorMessage: "Enter your first name",
+                        nameRegExpErrorMessage:
+                            "First name must start with a capital letter and contain only letters."),
                     SizedBox(height: SizeConfig.screenHeight! * 0.01),
                     NameTextFormFieldWidget(
-                        nameTEController: _lastNameTEController,
-                        validator: (String? value) {},
-                        labelText: "Last name",
-                        hintText: "Last name"),
+                      nameTEController: _lastNameTEController,
+                      labelText: "Last name",
+                      hintText: "Last name",
+                      emptyErrorMessage: "Enter your last name",
+                      nameRegExpErrorMessage:
+                          "Last name must start with a capital letter and contain only letters.",
+                    ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.01),
                     EmailTextFormFieldWidget(
                       emailTEController: _emailTEController,
-                      validator: (String? value) {},
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.01),
                     MobileTextFormFieldWidget(
                       mobileTEController: _mobileTEController,
-                      validator: (String? value) {},
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.01),
                     PasswordTextFormFieldWidget(
                       passwordTEController: _passwordTEController,
                       hintText: "Password",
                       labelText: "Password",
-                      validator: (String? value) {},
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.02),
                     ElevatedButton(

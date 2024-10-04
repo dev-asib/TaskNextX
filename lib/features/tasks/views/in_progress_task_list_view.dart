@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_next_x/app/utils/size_config.dart';
+import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/features/tasks/widgets/profile_app_bar.dart';
 import 'package:task_next_x/features/tasks/widgets/task_item_widget.dart';
 

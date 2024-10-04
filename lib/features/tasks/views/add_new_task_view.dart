@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_next_x/app/utils/size_config.dart';
+import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
-import 'package:task_next_x/features/auth/widgets/auth_header_widget.dart';
+import 'package:task_next_x/app/widgets/auth_header_widget.dart';
 import 'package:task_next_x/features/tasks/widgets/profile_app_bar.dart';
 import 'package:task_next_x/features/tasks/widgets/text_form_field_widget.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';

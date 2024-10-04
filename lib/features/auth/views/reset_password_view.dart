@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_next_x/app/utils/size_config.dart';
+import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/app/widgets/auth_footer_widget.dart';
 import 'package:task_next_x/app/widgets/password_text_form_field_widget.dart';
-import 'package:task_next_x/features/auth/widgets/auth_header_widget.dart';
+import 'package:task_next_x/app/widgets/auth_header_widget.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
@@ -44,21 +44,19 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     const AuthHeaderWidget(
                       title: "Set Password",
                       subTitle:
-                          "Minimum length of password should be more than 6 letters and combination of letters and numbers",
+                          "The password must be at least 8 characters long and include letters, numbers and special characters",
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.03),
                     PasswordTextFormFieldWidget(
                       passwordTEController: _passwordTEController,
                       hintText: "Password",
                       labelText: "Password",
-                      validator: (String? value) {},
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.01),
                     PasswordTextFormFieldWidget(
                       passwordTEController: _confirmPasswordTEController,
                       hintText: "Confirm password",
                       labelText: "Confirm password",
-                      validator: (String? value) {},
                     ),
                     SizedBox(height: SizeConfig.screenHeight! * 0.02),
                     ElevatedButton(

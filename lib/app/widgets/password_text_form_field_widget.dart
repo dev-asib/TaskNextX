@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:task_next_x/resources/constants/validators.dart';
 
 class PasswordTextFormFieldWidget extends StatefulWidget {
   const PasswordTextFormFieldWidget({
     super.key,
     required this.passwordTEController,
-    required this.validator,
+    this.validator,
     required this.hintText,
     required this.labelText,
   });
 
   final TextEditingController passwordTEController;
-  final String? Function(String?) validator;
+  final String? Function(String?)? validator;
   final String hintText;
   final String labelText;
 
@@ -23,6 +24,12 @@ class _PasswordTextFormFieldWidgetState
     extends State<PasswordTextFormFieldWidget> {
   bool _isPasswordVisible = false;
 
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -30,20 +37,28 @@ class _PasswordTextFormFieldWidgetState
       keyboardType: TextInputType.visiblePassword,
       textInputAction: TextInputAction.next,
       obscureText: !_isPasswordVisible,
-      decoration: InputDecoration(
-        labelText: widget.labelText,
-        hintText: widget.hintText,
-        prefixIcon: const Icon(Icons.password),
-        suffixIcon: IconButton(
-          onPressed: () {
-            _isPasswordVisible = !_isPasswordVisible;
-            setState(() {});
-          },
-          icon: Icon(
-              _isPasswordVisible ? Icons.visibility : Icons.visibility_off),
-        ),
+      decoration: _buildInputDecoration(),
+      validator: widget.validator ?? _passwordValidation,
+    );
+  }
+
+  String? _passwordValidation(String? value) {
+    if (value?.trim().isEmpty ?? true) {
+      return "Enter your password";
+    }
+    return Validators.validatePassword(value!);
+  }
+
+  InputDecoration _buildInputDecoration() {
+    return InputDecoration(
+      labelText: widget.labelText,
+      hintText: widget.hintText,
+      prefixIcon: const Icon(Icons.password),
+      suffixIcon: IconButton(
+        onPressed: _togglePasswordVisibility,
+        icon:
+        Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
       ),
-      validator: widget.validator,
     );
   }
 }
