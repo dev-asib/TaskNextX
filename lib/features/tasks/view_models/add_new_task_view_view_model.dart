@@ -3,21 +3,22 @@ import 'package:task_next_x/app/models/entities/network_response.dart';
 import 'package:task_next_x/app/services/network_services.dart';
 import 'package:task_next_x/resources/constants/api_urls.dart';
 
-class SignInViewViewModel {
-  static Future<NetworkResponse> signIn({
-    required String email,
-    required String password,
+class AddNewTaskViewViewModel {
+  static Future<NetworkResponse> addTask({
+    required String title,
+    required String description,
   }) async {
     Map<String, dynamic> requestData = {
-      "email": email,
-      "password": password,
+      'title': title,
+      'description': description,
     };
 
     final NetworkResponse response =
         await Get.find<NetworkServices>().postRequest(
-      ApiUrls.logIn,
+      ApiUrls.createTask,
       body: requestData,
     );
+
     return response;
   }
 }

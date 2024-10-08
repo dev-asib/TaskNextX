@@ -1,10 +1,10 @@
-class SignInDataModel {
+class UserModel {
   String? email;
   String? password;
 
-  SignInDataModel({this.email, this.password});
+  UserModel({this.email, this.password});
 
-  SignInDataModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     password = json['password'];
   }

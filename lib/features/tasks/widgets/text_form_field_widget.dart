@@ -4,13 +4,13 @@ class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
     super.key,
     required this.textTEController,
-    required this.validator,
     required this.hintText,
     required this.maxLines,
+    this.validator,
   });
 
   final TextEditingController textTEController;
-  final String? Function(String?) validator;
+  final String? Function(String?)? validator;
   final String hintText;
   final int maxLines;
 
@@ -22,7 +22,14 @@ class TextFormFieldWidget extends StatelessWidget {
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(hintText: hintText),
-      validator: validator,
+      validator: validator ?? _textFieldValidation,
     );
+  }
+
+  String? _textFieldValidation(String? value) {
+    if (value?.trim().isEmpty ?? true) {
+      return "You have to write some text";
+    }
+    return null;
   }
 }

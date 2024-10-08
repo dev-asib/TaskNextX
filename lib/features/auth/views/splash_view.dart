@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
+import 'package:task_next_x/data/local/auth_controller_services.dart';
 import 'package:task_next_x/resources/constants/assets_paths.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
@@ -15,9 +16,13 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Future<void> _moveToNextView() async {
+    bool isLoggedIn = await AuthControllerServices.checkAuthState();
+
     Future.delayed(
       const Duration(seconds: 3),
-          () => Get.offAllNamed(RoutesName.signInView),
+      () => Get.offAllNamed(
+        isLoggedIn ? RoutesName.bottomNavMainView : RoutesName.signInView,
+      ),
     );
   }
 

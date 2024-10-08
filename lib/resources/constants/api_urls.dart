@@ -19,7 +19,8 @@ class ApiUrls {
   static String recoverVerifyEmail(String email) =>
       '$_baseUrl/RecoverVerifyEmail/$email';
 
-  static String otpVerification(String email, String otp) =>
+  static String recoverVerifyOtp(String email, String otp) =>
       '$_baseUrl/RecoverVerifyOtp/$email/$otp';
-  static const String recoverResetPass = '$_baseUrl/RecoverResetPassword';
+
+  static const String recoverResetPassword = '$_baseUrl/RecoverResetPassword';
 }

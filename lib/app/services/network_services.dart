@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:task_next_x/app/models/entities/network_response.dart';
 import 'package:task_next_x/app/services/logger_service.dart';
-import 'package:task_next_x/data/local/shared_preferences_services.dart';
+import 'package:task_next_x/data/local/auth_controller_services.dart';
 
 class NetworkServices {
   final LoggerService loggerService;
@@ -16,7 +16,7 @@ class NetworkServices {
       final Response response = await get(
         uri,
         headers: {
-          'token': AuthServices.accessToken,
+          'token': AuthControllerServices.accessToken,
         },
       );
 
@@ -77,7 +77,7 @@ class NetworkServices {
       final Response response =
           await post(uri, body: jsonEncode(body), headers: {
         'Content-type': 'Application/json',
-        'token': AuthServices.accessToken,
+        'token': AuthControllerServices.accessToken,
       });
 
       if (response.statusCode == 200 || response.statusCode == 201) {

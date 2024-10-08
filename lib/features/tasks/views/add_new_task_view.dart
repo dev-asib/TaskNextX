@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:task_next_x/app/controllers/tasks_controllers/add_new_task_controller.dart';
+import 'package:task_next_x/app/utils/helpers/alert_helper.dart';
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/app/widgets/auth_header_widget.dart';
+import 'package:task_next_x/app/widgets/centered_progress_indicator.dart';
+import 'package:task_next_x/features/tasks/widgets/add_new_task/add_new_task_form_widget.dart';
 import 'package:task_next_x/features/tasks/widgets/profile_app_bar.dart';
-import 'package:task_next_x/features/tasks/widgets/text_form_field_widget.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
+import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
 class AddNewTaskView extends StatefulWidget {
   const AddNewTaskView({super.key});
@@ -15,7 +20,7 @@ class AddNewTaskView extends StatefulWidget {
 }
 
 class _AddNewTaskViewState extends State<AddNewTaskView> {
-  final TextEditingController _subjectTEController = TextEditingController();
+  final TextEditingController _titleTEController = TextEditingController();
   final TextEditingController _descriptionTEController =
       TextEditingController();
 
@@ -34,42 +39,20 @@ class _AddNewTaskViewState extends State<AddNewTaskView> {
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.all(SizeConfig.screenWidth! * 0.06),
-              child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: SizeConfig.screenHeight! * 0.0389),
-                    const AuthHeaderWidget(
-                      title: "Add New Task",
-                    ),
-                    SizedBox(height: SizeConfig.screenHeight! * 0.03),
-                    TextFormFieldWidget(
-                      textTEController: _subjectTEController,
-                      validator: (String? value) {},
-                      hintText: "Subject",
-                      maxLines: 1,
-                    ),
-                    SizedBox(height: SizeConfig.screenHeight! * 0.01),
-                    TextFormFieldWidget(
-                      textTEController: _descriptionTEController,
-                      validator: (String? value) {},
-                      hintText: "Description",
-                      maxLines: 6,
-                    ),
-                    SizedBox(height: SizeConfig.screenHeight! * 0.02),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Handle Add Button
-                        }
-                      },
-                      child: const Text("Add"),
-                    ),
-                    SizedBox(height: SizeConfig.screenHeight! * 0.04),
-                  ],
-                ),
+              child: Column(
+                children: [
+                  SizedBox(height: SizeConfig.screenHeight! * 0.0389),
+                  const AuthHeaderWidget(title: "Add New Task"),
+                  SizedBox(height: SizeConfig.screenHeight! * 0.03),
+                  AddNewTaskFormWidget(
+                    formKey: _formKey,
+                    titleTEController: _titleTEController,
+                    descriptionTEController: _descriptionTEController,
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight! * 0.02),
+                  _buildTaskAddButton(),
+                  SizedBox(height: SizeConfig.screenHeight! * 0.04),
+                ],
               ),
             ),
           ),
@@ -78,9 +61,76 @@ class _AddNewTaskViewState extends State<AddNewTaskView> {
     );
   }
 
+  Widget _buildTaskAddButton() {
+    return GetBuilder<AddNewTaskController>(builder: (addNewTaskController) {
+      return Visibility(
+        visible: !addNewTaskController.inProgress,
+        replacement: const CenteredProgressIndicator(),
+        child: ElevatedButton(
+          onPressed: _onTapAddButton,
+          child: const Text("Add"),
+        ),
+      );
+    });
+  }
+
+  _onTapAddButton() async {
+    if (_formKey.currentState!.validate()) {
+      final bool isBrightness =
+          Theme.of(context).brightness == Brightness.light;
+      final AddNewTaskController addNewTaskController =
+          Get.find<AddNewTaskController>();
+
+      await addNewTaskController.addNewTask(
+        title: _titleTEController.text.trim(),
+        description: _descriptionTEController.text.trim(),
+        clearTextFormField: _clearTextFormField,
+        addToFailedTask: () => _addToFailedTask(
+          addNewTaskController,
+          isBrightness,
+        ),
+        addToSuccessTask: _addToSuccessTask,
+        onPressedAddButton: _onPressedAddButton,
+      );
+    }
+  }
+
+  void _addToFailedTask(
+      AddNewTaskController addNewTaskController, bool isBrightness) {
+    if (mounted) {
+      AlertHelper.showFlushBarMessage(
+        context: context,
+        title: "Warning!",
+        message: addNewTaskController.errorMessage.toString(),
+        backgroundColor: isBrightness
+            ? LightShadeAppColors.redColor
+            : DarkShadeAppColors.redColor,
+      );
+    }
+  }
+
+  void _addToSuccessTask() {
+    if (mounted) {
+      AlertHelper.showFlushBarMessage(
+        context: context,
+        title: "Congratulations",
+        message: "Successfully Added Task",
+      );
+    }
+  }
+
+  void _onPressedAddButton() {
+    Get.toNamed(RoutesName.bottomNavMainView);
+  }
+
+  void _clearTextFormField() {
+    _titleTEController.clear();
+    _descriptionTEController.clear();
+  }
+
   @override
   void dispose() {
-    _subjectTEController.dispose();
+    _titleTEController.dispose();
     _descriptionTEController.dispose();
     super.dispose();
   }

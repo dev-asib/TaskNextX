@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/app/models/entities/network_response.dart';
+import 'package:task_next_x/app/models/sign_In/log_in_model.dart';
+import 'package:task_next_x/data/local/auth_controller_services.dart';
 import 'package:task_next_x/features/auth/view_models/sign_in_view_view_model.dart';
 
 class SignInController extends GetxController {
@@ -29,7 +31,15 @@ class SignInController extends GetxController {
       password: password,
     );
 
-    if (response.isSuccess) {
+    _inProgress = false;
+    update();
+
+    if (response.isSuccess && response.responseBody['status'] == 'success') {
+      LoginModel loginModel = LoginModel.fromJson(response.responseBody);
+
+      AuthControllerServices.saveUserAccessToken(loginModel.token!);
+      AuthControllerServices.saveUserData(loginModel.userModel!);
+
       _errorMessage = null;
       isSuccess = true;
       clearTextFormField();
@@ -37,13 +47,10 @@ class SignInController extends GetxController {
       signInSuccess();
       debugPrint("Sign In Successful.");
     } else {
-      _errorMessage = response.errorMessage ?? 'Sign In failed! Try again.';
+      _errorMessage = response.errorMessage ?? 'Sign in failed! Try again.';
       debugPrint(_errorMessage);
       signInFailed();
     }
-
-    _inProgress = false;
-    update();
 
     return isSuccess;
   }
