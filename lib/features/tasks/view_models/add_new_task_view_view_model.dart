@@ -11,6 +11,7 @@ class AddNewTaskViewViewModel {
     Map<String, dynamic> requestData = {
       'title': title,
       'description': description,
+      "status":"New"
     };
 
     final NetworkResponse response =

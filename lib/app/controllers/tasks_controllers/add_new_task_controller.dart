@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_next_x/app/controllers/tasks_controllers/new_task_controller.dart';
+import 'package:task_next_x/app/controllers/tasks_controllers/task_count_by_status_controller.dart';
 import 'package:task_next_x/app/models/entities/network_response.dart';
 import 'package:task_next_x/features/tasks/view_models/add_new_task_view_view_model.dart';
 
@@ -35,6 +37,8 @@ class AddNewTaskController extends GetxController {
       clearTextFormField();
       onPressedAddButton();
       addToSuccessTask();
+      Get.find<NewTaskController>().getNewTaskList();
+      Get.find<TaskCountByStatusController>().getTaskCountByStatus();
       debugPrint("Task added");
     } else {
       _errorMessage = response.errorMessage;

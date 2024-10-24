@@ -35,7 +35,7 @@ class _CompletedTaskListViewState extends State<CompletedTaskListView> {
       child: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const TaskItemWidget();
+        //  return const TaskItemWidget();
         },
       ),
     );

@@ -13,7 +13,8 @@ class AlertHelper {
   }) async {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final bool isBrightness = Theme.of(context).brightness == Brightness.light;
-    Flushbar(
+
+     Flushbar(
       titleText: Text(
         title,
         style: textTheme.headlineSmall?.copyWith(

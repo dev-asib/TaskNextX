@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_next_x/app/controllers/tasks_controllers/new_task_controller.dart';
+import 'package:task_next_x/app/controllers/tasks_controllers/task_count_by_status_controller.dart';
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
+import 'package:task_next_x/app/widgets/centered_progress_indicator.dart';
+import 'package:task_next_x/features/tasks/widgets/empty_task_widget.dart';
 import 'package:task_next_x/features/tasks/widgets/profile_app_bar.dart';
 import 'package:task_next_x/features/tasks/widgets/task_item_widget.dart';
 import 'package:task_next_x/features/tasks/widgets/task_summary_card.dart';
@@ -14,6 +18,17 @@ class NewTaskListView extends StatefulWidget {
 }
 
 class _NewTaskListViewState extends State<NewTaskListView> {
+  @override
+  void initState() {
+    super.initState();
+    _initialCall();
+  }
+
+  void _initialCall() {
+    Get.find<NewTaskController>().getNewTaskList();
+    Get.find<TaskCountByStatusController>().getTaskCountByStatus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,39 +59,51 @@ class _NewTaskListViewState extends State<NewTaskListView> {
 
   Widget _buildTaskItemList() {
     return Expanded(
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return const TaskItemWidget();
+      child: RefreshIndicator(
+        onRefresh: () async {
+          _initialCall();
         },
+        child: GetBuilder<NewTaskController>(builder: (newTaskController) {
+          if (newTaskController.inProgress) {
+            return const CenteredProgressIndicator();
+          }
+          return Visibility(
+            visible: newTaskController.newTaskList.isEmpty == false,
+            replacement: const EmptyTaskWidget(),
+            child: ListView.builder(
+              itemCount: newTaskController.newTaskList.length,
+              itemBuilder: (context, index) {
+                return TaskItemWidget(
+                  taskModel: newTaskController.newTaskList[index],
+                  onUpdate: _initialCall,
+                );
+              },
+            ),
+          );
+        }),
       ),
     );
   }
 
   Widget _buildSummarySection() {
-    return const SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          TaskSummaryCard(
-            taskCount: "10",
-            taskTitle: "New",
+    return GetBuilder<TaskCountByStatusController>(
+        builder: (taskCountByStatusController) {
+      return Visibility(
+        visible: !taskCountByStatusController.inProgress,
+        replacement: const CenteredProgressIndicator(),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: taskCountByStatusController.taskCountByStatusList.map((e) {
+              return TaskSummaryCard(
+                taskTitle: (e.sId ?? "Unknown").toUpperCase(),
+                taskCount: (e.sum.toString()),
+              );
+            }).toList(),
           ),
-          TaskSummaryCard(
-            taskCount: "4",
-            taskTitle: "Completed",
-          ),
-          TaskSummaryCard(
-            taskCount: "7",
-            taskTitle: "In Progress",
-          ),
-          TaskSummaryCard(
-            taskCount: "25",
-            taskTitle: "Cancelled",
-          ),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 
   void _onTapAddButton() {

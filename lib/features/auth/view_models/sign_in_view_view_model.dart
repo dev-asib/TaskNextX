@@ -14,7 +14,7 @@ class SignInViewViewModel {
     };
 
     final NetworkResponse response =
-        await Get.find<NetworkServices>().postRequest(
+    await Get.find<NetworkServices>().postRequest(
       ApiUrls.logIn,
       body: requestData,
     );
