@@ -99,26 +99,19 @@ class _EmailVerificationViewState extends State<EmailVerificationView> {
   }
 
   void _emailVerificationFailed(bool isBrightness) {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Email Verification Alert!",
-        message: emailVerificationController.errorMessage.toString(),
-        backgroundColor: isBrightness
-            ? LightShadeAppColors.redColor
-            : DarkShadeAppColors.redColor,
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Email Verification Alert!",
+      message: emailVerificationController.errorMessage.toString(),
+      isError: true,
+    );
   }
 
   void _emailVerificationSuccess() {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "OTP",
-        message: "We sent 6 digits OTP code to your email.",
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "OTP",
+      message: "We sent 6 digits OTP code to your email.",
+      isError: false,
+    );
   }
 
   void _onPressedEmailVerificationButton() {

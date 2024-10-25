@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/app/controllers/tasks_controllers/delete_task_controller.dart';
+import 'package:task_next_x/app/controllers/tasks_controllers/update_task_controller.dart';
 import 'package:task_next_x/app/models/tasks/task_model.dart';
+import 'package:task_next_x/app/utils/date/date_formatter.dart';
 import 'package:task_next_x/app/utils/helpers/alert_helper.dart';
+import 'package:task_next_x/app/widgets/centered_progress_indicator.dart';
+import 'package:task_next_x/features/tasks/widgets/pop_up_menu_button_widget.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
 
@@ -21,6 +25,15 @@ class TaskItemWidget extends StatefulWidget {
 }
 
 class _TaskItemWidgetState extends State<TaskItemWidget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<UpdateTaskController>()
+          .getDropDownTaskStatus(widget.taskModel.status!);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool isBrightness = Theme.of(context).brightness == Brightness.light;
@@ -45,22 +58,27 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                 overflow: TextOverflow.ellipsis,
                 widget.taskModel.description ?? 'Unknown Description',
               ),
-              const Text("24/09.2024"),
+              const SizedBox(height: 8),
+              Text(
+                DateFormatter.formatDate(widget.taskModel.createdDate),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: isBrightness
+                          ? LightShadeAppColors.themeColor
+                          : DarkShadeAppColors.themeColor,
+                    ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Chip(
-                    label: Text("Label"),
+                  Chip(
+                    label: Text(widget.taskModel.status ?? 'New'),
                   ),
                   Row(
                     children: [
-                      IconButton(
-                        onPressed: _deleteTask,
-                        icon: const Icon(Icons.edit),
-                      ),
-                      IconButton(
-                        onPressed: _deleteTask,
-                        icon: const Icon(Icons.delete),
+                      _deleteTaskButton(),
+                      UpdateTaskMenuButtonWidget(
+                        taskID: widget.taskModel.sId ?? '',
+                        onUpdate: widget.onUpdate,
                       ),
                     ],
                   ),
@@ -73,30 +91,42 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
     );
   }
 
+  Widget _deleteTaskButton() {
+    return GetBuilder<DeleteTaskController>(builder: (deleteTaskController) {
+      final bool isBrightness =
+          Theme.of(context).brightness == Brightness.light;
+      return Visibility(
+        visible: !deleteTaskController.inProgress,
+        replacement: const CenteredProgressIndicator(),
+        child: IconButton(
+          onPressed: _deleteTask,
+          icon: Icon(
+            Icons.delete,
+            color: isBrightness
+                ? LightShadeAppColors.redColor
+                : DarkShadeAppColors.redColor,
+          ),
+        ),
+      );
+    });
+  }
+
   Future<void> _deleteTask() async {
-    final bool isBrightness = Theme.of(context).brightness == Brightness.light;
     bool isItemDeleted = await Get.find<DeleteTaskController>()
         .deleteTaskItem(widget.taskModel.sId!);
     if (isItemDeleted) {
       widget.onUpdate();
-      if (mounted) {
-        AlertHelper.showFlushBarMessage(
-          context: context,
-          title: "Congratulations",
-          message: "Item successfully deleted",
-        );
-      }
+      AlertHelper.showFlushBarMessage(
+        title: "Congratulations",
+        message: "Item successfully deleted",
+        isError: false,
+      );
     } else {
-      if (mounted) {
-        AlertHelper.showFlushBarMessage(
-          context: context,
-          title: "Warning",
-          message: "item not deleted! Try again.",
-          backgroundColor: isBrightness
-              ? LightShadeAppColors.redColor
-              : DarkShadeAppColors.redColor,
-        );
-      }
+      AlertHelper.showFlushBarMessage(
+        title: "Warning",
+        message: "item not deleted! Try again.",
+        isError: true,
+      );
     }
   }
 }

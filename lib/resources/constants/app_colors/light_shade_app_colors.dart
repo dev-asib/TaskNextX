@@ -65,4 +65,5 @@ class LightShadeAppColors {
   static const Color anotherFlushBarTitleColor = Colors.white;
   static const Color anotherFlushBarMessageColor = Colors.white;
   static const Color anotherFlushBackgroundColor = Colors.green;
+  static const Color anotherFlushErrorBackgroundColor = Colors.red;
 }

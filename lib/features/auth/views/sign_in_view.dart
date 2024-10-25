@@ -117,26 +117,16 @@ class _SignInViewState extends State<SignInView> {
   }
 
   void _signUpFailed(SignInController signInController, bool isBrightness) {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Sign In Alert!",
-        message: signInController.errorMessage.toString(),
-        backgroundColor: isBrightness
-            ? LightShadeAppColors.redColor
-            : DarkShadeAppColors.redColor,
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Sign In Alert!",
+      message: signInController.errorMessage.toString(),
+      isError: true,
+    );
   }
 
   void _signUpSuccess() {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Congratulations",
-        message: "Login Successful",
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+        title: "Congratulations", message: "Login Successful", isError: false);
   }
 
   void _onPressedSignInButton() {

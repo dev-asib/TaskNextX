@@ -21,7 +21,9 @@ class _NewTaskListViewState extends State<NewTaskListView> {
   @override
   void initState() {
     super.initState();
-    _initialCall();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _initialCall();
+    });
   }
 
   void _initialCall() {
@@ -69,7 +71,7 @@ class _NewTaskListViewState extends State<NewTaskListView> {
           }
           return Visibility(
             visible: newTaskController.newTaskList.isEmpty == false,
-            replacement: const EmptyTaskWidget(),
+            replacement: const EmptyTaskWidget(title: "New task not found.",),
             child: ListView.builder(
               itemCount: newTaskController.newTaskList.length,
               itemBuilder: (context, index) {

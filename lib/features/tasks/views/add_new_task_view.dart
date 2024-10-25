@@ -97,26 +97,19 @@ class _AddNewTaskViewState extends State<AddNewTaskView> {
 
   void _addToFailedTask(
       AddNewTaskController addNewTaskController, bool isBrightness) {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Warning!",
-        message: addNewTaskController.errorMessage.toString(),
-        backgroundColor: isBrightness
-            ? LightShadeAppColors.redColor
-            : DarkShadeAppColors.redColor,
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Warning!",
+      message: addNewTaskController.errorMessage.toString(),
+      isError: true,
+    );
   }
 
   void _addToSuccessTask() {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Congratulations",
-        message: "Successfully Added Task",
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Congratulations",
+      message: "Successfully Added Task",
+      isError: false,
+    );
   }
 
   void _onPressedAddButton() {

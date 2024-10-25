@@ -110,26 +110,19 @@ class _PinVerificationViewState extends State<PinVerificationView> {
   }
 
   void _otpVerificationFailed(bool isBrightness) {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "OTP Verification Alert",
-        message: pinVerificationController.errorMessage.toString(),
-        backgroundColor: isBrightness
-            ? LightShadeAppColors.redColor
-            : DarkShadeAppColors.redColor,
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "OTP Verification Alert",
+      message: pinVerificationController.errorMessage.toString(),
+      isError: true,
+    );
   }
 
   void _otpVerificationSuccess() {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Congratulations",
-        message: "successfully OTP verified",
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Congratulations",
+      message: "successfully OTP verified",
+      isError: false,
+    );
   }
 
   void _onPressedOtpVerificationButton() {

@@ -115,26 +115,19 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   }
 
   void _resetPasswordFailed(bool isBrightness) {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Reset Password Alert",
-        message: _resetPasswordController.errorMessage.toString(),
-        backgroundColor: isBrightness
-            ? LightShadeAppColors.redColor
-            : DarkShadeAppColors.redColor,
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Reset Password Alert",
+      message: _resetPasswordController.errorMessage.toString(),
+      isError: true,
+    );
   }
 
   void _resetPasswordSuccess() {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Congratulations",
-        message: "successfully password change",
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Congratulations",
+      message: "successfully password change",
+      isError: false,
+    );
   }
 
   void _clearTextFormField() {

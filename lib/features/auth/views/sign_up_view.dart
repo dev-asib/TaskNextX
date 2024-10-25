@@ -108,26 +108,19 @@ class _SignUpViewState extends State<SignUpView> {
   }
 
   void _signUpSuccess() {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Congratulations",
-        message: "Registration Successful",
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Congratulations",
+      message: "Registration Successful",
+      isError: false,
+    );
   }
 
   void _signUpFailed(SignUpController signUpController, bool isBrightness) {
-    if (mounted) {
-      AlertHelper.showFlushBarMessage(
-        context: context,
-        title: "Registration Alert!",
-        message: signUpController.errorMessage.toString(),
-        backgroundColor: isBrightness
-            ? LightShadeAppColors.redColor
-            : DarkShadeAppColors.redColor,
-      );
-    }
+    AlertHelper.showFlushBarMessage(
+      title: "Registration Alert!",
+      message: signUpController.errorMessage.toString(),
+      isError: true,
+    );
   }
 
   void _clearTextFormField() {

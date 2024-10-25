@@ -3,6 +3,8 @@ import 'package:http/http.dart';
 import 'package:task_next_x/app/models/entities/network_response.dart';
 import 'package:task_next_x/app/services/logger_service.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';
+import 'package:task_next_x/resources/constants/routes/routes_name.dart';
+import 'package:get/get.dart' as getx;
 
 class NetworkServices {
   final LoggerService loggerService;
@@ -35,6 +37,7 @@ class NetworkServices {
           responseBody: decodedBody,
         );
       } else if (response.statusCode == 401) {
+        _redirectToSignIn();
         loggerService.responseLog(
           url,
           response.statusCode,
@@ -42,6 +45,7 @@ class NetworkServices {
           response.headers,
           false,
         );
+
         return NetworkResponse(
           statusCode: response.statusCode,
           isSuccess: false,
@@ -95,6 +99,7 @@ class NetworkServices {
           responseBody: decodedBody,
         );
       } else if (response.statusCode == 401) {
+        _redirectToSignIn();
         loggerService.responseLog(
           url,
           response.statusCode,
@@ -128,4 +133,11 @@ class NetworkServices {
       );
     }
   }
+
+
+  Future<void> _redirectToSignIn() async{
+    await AuthControllerServices.clearAllData();
+    getx.Get.offAll(RoutesName.signInView);
+  }
+
 }

@@ -10,14 +10,14 @@ class DeleteTaskController extends GetxController {
 
   String? get errorMessage => _errorMessage;
 
-  Future<bool> deleteTaskItem(String itemID) async {
+  Future<bool> deleteTaskItem(String taskID) async {
     bool isSuccess = false;
 
     _inProgress = true;
     update();
 
     final NetworkResponse response =
-        await DeleteTaskViewModel.deleteTask(itemID);
+        await DeleteTaskViewModel.deleteTask(taskID);
 
     if (response.isSuccess) {
       _errorMessage = null;

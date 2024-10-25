@@ -10,11 +10,14 @@ import 'package:task_next_x/resources/themes/light_shade_app_themes.dart';
 class TaskNextX extends StatelessWidget {
   const TaskNextX({super.key});
 
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return GetMaterialApp(
       initialBinding: AllBindings(),
+      navigatorKey: TaskNextX.navigatorKey,
       initialRoute: RoutesName.splashView,
       getPages: AppRoutes.appRoutes(),
       unknownRoute: AppRoutes.unknownRoute(),
