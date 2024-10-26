@@ -85,8 +85,6 @@ class _SignUpViewState extends State<SignUpView> {
 
   _onTapSignUpButton() async {
     if (_formKey.currentState!.validate()) {
-      final bool isBrightness =
-          Theme.of(context).brightness == Brightness.light;
       final SignUpController signUpController = Get.find<SignUpController>();
 
       await signUpController.signUpUser(
@@ -96,7 +94,7 @@ class _SignUpViewState extends State<SignUpView> {
         mobile: _mobileTEController.text.trim(),
         password: _passwordTEController.text,
         clearTextFormField: _clearTextFormField,
-        signUpFailed: () => _signUpFailed(signUpController, isBrightness),
+        signUpFailed: () => _signUpFailed(signUpController),
         signUpSuccess: _signUpSuccess,
         onPressedSignUpButton: _onPressedSignUpButton,
       );
@@ -115,7 +113,7 @@ class _SignUpViewState extends State<SignUpView> {
     );
   }
 
-  void _signUpFailed(SignUpController signUpController, bool isBrightness) {
+  void _signUpFailed(SignUpController signUpController) {
     AlertHelper.showFlushBarMessage(
       title: "Registration Alert!",
       message: signUpController.errorMessage.toString(),

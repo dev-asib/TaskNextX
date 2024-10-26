@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:task_next_x/app/models/entities/network_response.dart';
 import 'package:task_next_x/app/services/logger_service.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';
@@ -15,10 +16,10 @@ class NetworkServices {
     try {
       final Uri uri = Uri.parse(url);
       loggerService.requestLog(url, {}, {}, "");
-      final Response response = await get(
+      final http.Response response = await get(
         uri,
         headers: {
-          'token': AuthControllerServices.accessToken,
+          'token': getx.Get.find<AuthControllerServices>().accessToken,
         },
       );
 
@@ -78,10 +79,10 @@ class NetworkServices {
     try {
       final Uri uri = Uri.parse(url);
       loggerService.requestLog(url, {}, body ?? {}, "");
-      final Response response =
-          await post(uri, body: jsonEncode(body), headers: {
+      final http.Response response =
+      await post(uri, body: jsonEncode(body), headers: {
         'Content-type': 'Application/json',
-        'token': AuthControllerServices.accessToken,
+        'token': getx.Get.find<AuthControllerServices>().accessToken,
       });
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -134,10 +135,8 @@ class NetworkServices {
     }
   }
 
-
-  Future<void> _redirectToSignIn() async{
-    await AuthControllerServices.clearAllData();
-    getx.Get.offAll(RoutesName.signInView);
+  Future<void> _redirectToSignIn() async {
+    await getx.Get.find<AuthControllerServices>().clearAllData();
+    getx.Get.offAllNamed(RoutesName.signInView);
   }
-
 }

@@ -5,7 +5,7 @@ import 'package:task_next_x/app/controllers/tasks_controllers/task_count_by_stat
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/centered_progress_indicator.dart';
 import 'package:task_next_x/features/tasks/widgets/empty_task_widget.dart';
-import 'package:task_next_x/features/tasks/widgets/profile_app_bar.dart';
+import 'package:task_next_x/app/widgets/profile_app_bar.dart';
 import 'package:task_next_x/features/tasks/widgets/task_item_widget.dart';
 import 'package:task_next_x/features/tasks/widgets/task_summary_card.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';

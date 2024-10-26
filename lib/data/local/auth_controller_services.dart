@@ -1,80 +1,185 @@
 import 'dart:convert';
-
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:task_next_x/app/models/sign_In/user_model.dart';
+import 'package:task_next_x/app/models/user_auth_model/user_model.dart';
 
-class AuthControllerServices {
-  static const _accessToken = 'access_token';
-  static const _userDataKey = 'user_data';
-  static const _verificationEmailKey = 'user_data';
-  static const _verifyOtpKey = 'user_data';
+class AuthControllerServices extends GetxController {
+  final String _accessTokenKey = 'access_token';
+  final String _userDataKey = 'user_data';
+  final String _verificationEmailKey = 'verification_email';
+  final String _verifyOtpKey = 'verify_otp';
+  final String _profilePhotoKey = 'profile_image';
 
-  static String accessToken = '';
-  static UserModel? userData;
-  static String verificationEmail = '';
-  static String verifyOtp = '';
+  String _accessToken = '';
+  UserModel? _userData;
+  String _verificationEmail = '';
+  String _verifyOtp = '';
+  String _encodedProfilePhoto = '';
 
-  static Future<void> saveUserAccessToken(String token) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString(_accessToken, token);
-    accessToken = token;
+  String get accessToken => _accessToken;
+
+  UserModel? get userData => _userData;
+
+  String get verificationEmail => _verificationEmail;
+
+  String get verifyOtp => _verifyOtp;
+
+  String get encodedProfilePhoto => _encodedProfilePhoto;
+
+  Future<void> saveUserAccessToken(String token) async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      await sharedPreferences.setString(_accessTokenKey, token);
+      _accessToken = token;
+      update();
+    } catch (e) {
+      debugPrint("Error saving access token: $e");
+    }
   }
 
-  static Future<String?> getUserAccessToken() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString(_accessToken);
+  Future<void> getUserAccessToken() async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      _accessToken = sharedPreferences.getString(_accessTokenKey) ?? '';
+      update();
+    } catch (e) {
+      debugPrint("Error receiving access token: $e");
+    }
   }
 
-  static Future<void> saveUserData(UserModel user) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString(_userDataKey, jsonEncode(user.toJson()));
-    userData = user;
+  Future<void> saveUserData(UserModel user) async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      await sharedPreferences.setString(
+          _userDataKey, jsonEncode(user.toJson()));
+      _userData = user;
+      update();
+    } catch (e) {
+      debugPrint("Error saving user data: $e");
+    }
   }
 
-  static Future<UserModel?> getUserData() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String? data = sharedPreferences.getString(_userDataKey);
+  Future<UserModel?> getUserData() async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      String? data = sharedPreferences.getString(_userDataKey);
 
-    if (data == null) return null;
+      if (data == null) return null;
 
-    UserModel userModel = UserModel.fromJson(jsonDecode(data));
-    return userModel;
+      _userData = UserModel.fromJson(jsonDecode(data));
+      update();
+      return _userData;
+    } catch (e) {
+      debugPrint("Error receiving user data: $e");
+      return null;
+    }
   }
 
-  static Future<void> saveVerificationEmail(String email) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString(_verificationEmailKey, email);
-    verificationEmail = email;
+  Future<void> saveVerificationEmail(String email) async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      sharedPreferences.setString(_verificationEmailKey, email);
+      _verificationEmail = email;
+      update();
+    } catch (e) {
+      debugPrint("Error saving verification email: $e");
+    }
   }
 
-  static Future<void> getVerificationEmail() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.getString(_verificationEmailKey);
+  Future<void> getVerificationEmail() async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      _verificationEmail =
+          sharedPreferences.getString(_verificationEmailKey) ?? '';
+      update();
+    } catch (e) {
+      debugPrint("Error receiving verification email: $e");
+    }
   }
 
-  static Future<void> saveVerifyOtp(String otp) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString(_verifyOtpKey, otp);
-    verifyOtp = otp;
+  Future<void> saveVerifyOtp(String otp) async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      sharedPreferences.setString(_verifyOtpKey, otp);
+      _verifyOtp = otp;
+      update();
+    } catch (e) {
+      debugPrint("Error saving verification otp: $e");
+    }
   }
 
-  static Future<void> getVerifyOtp() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.getString(_verifyOtpKey);
+  Future<void> getVerifyOtp() async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      _verifyOtp = sharedPreferences.getString(_verifyOtpKey) ?? '';
+      update();
+    } catch (e) {
+      debugPrint("Error receiving verification otp: $e");
+    }
   }
 
-  static Future<void> clearAllData() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
+  Future<void> saveEncodedProfilePhoto(String encodedPhoto) async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      await sharedPreferences.setString(_profilePhotoKey, encodedPhoto);
+      _encodedProfilePhoto = encodedPhoto;
+      update();
+    } catch (e) {
+      debugPrint("Error saving encoded profile photo: $e");
+    }
   }
 
-  static Future<bool> checkAuthState() async {
-    String? token = await getUserAccessToken();
+  Future<void> getProfilePhoto() async {
+    try {
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      _encodedProfilePhoto = sharedPreferences.getString(_profilePhotoKey) ?? '';
+      update();
+    } catch (e) {
+      debugPrint("Error receiving profile photo: $e");
+    }
+  }
 
-    if (token == null) return false;
+  Future<void> clearAllData() async {
+    try {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      await sharedPreferences.clear();
+      _accessToken = '';
+      _userData = null;
+      _verificationEmail = '';
+      _verifyOtp = '';
+      _encodedProfilePhoto = '';
+      update();
+    } catch (e) {
+      debugPrint("Error clearing all data: $e");
+    }
+  }
 
-    accessToken = token;
-    userData = await getUserData();
+  Future<bool> checkAuthState() async {
+    await getUserAccessToken();
+
+    if (_accessToken.isEmpty) {
+      update();
+      return false;
+    }
+
+    _userData = await getUserData();
+
+    update();
     return true;
+  }
+
+  void onUserRefresh() {
+    update();
   }
 }

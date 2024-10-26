@@ -1,4 +1,4 @@
-import 'package:task_next_x/app/models/tasks/task_model.dart';
+import 'package:task_next_x/app/models/user_task_model/task_model.dart';
 
 class TaskListModel {
   String? status;

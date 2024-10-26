@@ -16,7 +16,7 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Future<void> _moveToNextView() async {
-    bool isLoggedIn = await AuthControllerServices.checkAuthState();
+    bool isLoggedIn = await Get.find<AuthControllerServices>().checkAuthState();
 
     Future.delayed(
       const Duration(seconds: 3),
@@ -30,6 +30,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     _moveToNextView();
+    Get.find<AuthControllerServices>().getProfilePhoto();
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:task_next_x/app/controllers/auth_controllers/pin_verification_co
 import 'package:task_next_x/app/controllers/auth_controllers/reset_password_controller.dart';
 import 'package:task_next_x/app/controllers/auth_controllers/sign_in_controller.dart';
 import 'package:task_next_x/app/controllers/auth_controllers/sign_up_controller.dart';
+import 'package:task_next_x/data/local/auth_controller_services.dart';
 
 class AuthBinding extends Bindings {
   @override
@@ -13,5 +14,6 @@ class AuthBinding extends Bindings {
     Get.put(EmailVerificationController());
     Get.put(PinVerificationController());
     Get.put(ResetPasswordController());
+    Get.put(AuthControllerServices());
   }
 }

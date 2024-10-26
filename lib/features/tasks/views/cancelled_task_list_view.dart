@@ -4,7 +4,7 @@ import 'package:task_next_x/app/controllers/tasks_controllers/cancelled_task_con
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/centered_progress_indicator.dart';
 import 'package:task_next_x/features/tasks/widgets/empty_task_widget.dart';
-import 'package:task_next_x/features/tasks/widgets/profile_app_bar.dart';
+import 'package:task_next_x/app/widgets/profile_app_bar.dart';
 import 'package:task_next_x/features/tasks/widgets/task_item_widget.dart';
 
 class CancelledTaskListView extends StatefulWidget {

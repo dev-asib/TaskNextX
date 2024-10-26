@@ -1,4 +1,4 @@
-import 'package:task_next_x/app/models/sign_In/user_model.dart';
+import 'package:task_next_x/app/models/user_auth_model/user_model.dart';
 
 class LoginModel {
   String? status;

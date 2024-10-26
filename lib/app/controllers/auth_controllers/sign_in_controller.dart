@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/app/models/entities/network_response.dart';
-import 'package:task_next_x/app/models/sign_In/log_in_model.dart';
+import 'package:task_next_x/app/models/user_auth_model/log_in_model.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';
 import 'package:task_next_x/features/auth/view_models/sign_in_view_view_model.dart';
-import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
 class SignInController extends GetxController {
   bool _inProgress = false;
@@ -38,8 +37,10 @@ class SignInController extends GetxController {
     if (response.isSuccess && response.responseBody['status'] == 'success') {
       LoginModel loginModel = LoginModel.fromJson(response.responseBody);
 
-      AuthControllerServices.saveUserAccessToken(loginModel.token!);
-      AuthControllerServices.saveUserData(loginModel.userModel!);
+      final AuthControllerServices authControllerServices =
+          Get.find<AuthControllerServices>();
+     await authControllerServices.saveUserAccessToken(loginModel.token!);
+     await authControllerServices.saveUserData(loginModel.userModel!);
 
       _errorMessage = null;
       isSuccess = true;

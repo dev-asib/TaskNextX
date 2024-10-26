@@ -34,8 +34,8 @@ class _PasswordTextFormFieldWidgetState
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.passwordTEController,
-      keyboardType: TextInputType.visiblePassword,
       textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.visiblePassword,
       obscureText: !_isPasswordVisible,
       decoration: _buildInputDecoration(),
       validator: widget.validator ?? _passwordValidation,
@@ -57,7 +57,7 @@ class _PasswordTextFormFieldWidgetState
       suffixIcon: IconButton(
         onPressed: _togglePasswordVisibility,
         icon:
-        Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
+            Icon(_isPasswordVisible ? Icons.visibility : Icons.visibility_off),
       ),
     );
   }

@@ -99,7 +99,7 @@ class _PinVerificationViewState extends State<PinVerificationView> {
           Theme.of(context).brightness == Brightness.light;
 
       await pinVerificationController.recoverVerifyOTP(
-        email: AuthControllerServices.verificationEmail,
+        email: Get.find<AuthControllerServices>().verificationEmail,
         otp: _pinTEController.text,
         clearTextFormField: _clearTextFormField,
         otpVerificationSuccess: _otpVerificationSuccess,

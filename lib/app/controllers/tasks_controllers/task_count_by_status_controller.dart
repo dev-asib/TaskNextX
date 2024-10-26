@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:task_next_x/app/models/entities/network_response.dart';
-import 'package:task_next_x/app/models/tasks/task_count_by_status_list_model.dart';
-import 'package:task_next_x/app/models/tasks/task_count_by_status_model.dart';
+import 'package:task_next_x/app/models/user_task_model/task_count_by_status_list_model.dart';
+import 'package:task_next_x/app/models/user_task_model/task_count_by_status_model.dart';
 import 'package:task_next_x/features/tasks/view_models/task_count_by_status_view_model.dart';
 
 class TaskCountByStatusController extends GetxController {

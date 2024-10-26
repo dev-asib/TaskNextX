@@ -1,4 +1,4 @@
-import 'package:task_next_x/app/models/tasks/task_count_by_status_model.dart';
+import 'package:task_next_x/app/models/user_task_model/task_count_by_status_model.dart';
 
 class TaskCountByStatusListModel {
   String? status;

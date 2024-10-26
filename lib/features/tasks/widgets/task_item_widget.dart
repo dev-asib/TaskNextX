@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/app/controllers/tasks_controllers/delete_task_controller.dart';
 import 'package:task_next_x/app/controllers/tasks_controllers/update_task_controller.dart';
-import 'package:task_next_x/app/models/tasks/task_model.dart';
+import 'package:task_next_x/app/models/user_task_model/task_model.dart';
 import 'package:task_next_x/app/utils/date/date_formatter.dart';
 import 'package:task_next_x/app/utils/helpers/alert_helper.dart';
 import 'package:task_next_x/app/widgets/centered_progress_indicator.dart';

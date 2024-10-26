@@ -98,9 +98,12 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       final bool isBrightness =
           Theme.of(context).brightness == Brightness.light;
 
+      final AuthControllerServices authControllerServices =
+          Get.find<AuthControllerServices>();
+
       await _resetPasswordController.resetPassword(
-        email: AuthControllerServices.verificationEmail,
-        otp: AuthControllerServices.verifyOtp,
+        email: authControllerServices.verificationEmail,
+        otp: authControllerServices.verifyOtp,
         password: _passwordTEController.text,
         clearTextFormField: _clearTextFormField,
         resetPasswordSuccess: _resetPasswordSuccess,

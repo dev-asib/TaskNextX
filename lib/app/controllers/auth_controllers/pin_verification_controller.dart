@@ -26,7 +26,7 @@ class PinVerificationController extends GetxController {
     update();
 
     NetworkResponse response =
-    await PinVerificationViewViewModel.pinVerification(
+        await PinVerificationViewViewModel.pinVerification(
       email: email,
       otp: otp,
     );
@@ -35,8 +35,11 @@ class PinVerificationController extends GetxController {
     update();
 
     if (response.isSuccess && response.responseBody['status'] == 'success') {
-      AuthControllerServices.saveVerifyOtp(otp);
-      AuthControllerServices.saveVerificationEmail(email);
+      final AuthControllerServices authControllerServices =
+          Get.find<AuthControllerServices>();
+     await authControllerServices.saveVerifyOtp(otp);
+     await authControllerServices.saveVerificationEmail(email);
+
       _errorMessage = null;
       isSuccess = true;
       clearTextFormField();
@@ -53,4 +56,3 @@ class PinVerificationController extends GetxController {
     return isSuccess;
   }
 }
-

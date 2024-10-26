@@ -30,7 +30,7 @@ class EmailVerificationController extends GetxController {
     if (response.isSuccess && response.responseBody['status'] == 'success') {
       _errorMessage = null;
       isSuccess = true;
-      AuthControllerServices.saveVerificationEmail(email);
+      await Get.find<AuthControllerServices>().saveVerificationEmail(email);
       clearTextFormField();
       onPressedEmailVerificationButton();
       emailVerificationSuccess();

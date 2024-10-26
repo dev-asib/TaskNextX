@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:task_next_x/app/models/entities/network_response.dart';
-import 'package:task_next_x/app/models/tasks/task_list_model.dart';
-import 'package:task_next_x/app/models/tasks/task_model.dart';
+import 'package:task_next_x/app/models/user_task_model/task_list_model.dart';
+import 'package:task_next_x/app/models/user_task_model/task_model.dart';
 import 'package:task_next_x/features/tasks/view_models/completed_task_view_view_model.dart';
 
 class CompletedTaskController extends GetxController {

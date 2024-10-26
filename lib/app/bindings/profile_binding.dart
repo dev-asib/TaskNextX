@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
+import 'package:task_next_x/app/controllers/profile_controllers/update_profile_controller.dart';
 
-class ProfileBinding extends Bindings{
+class ProfileBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
+    Get.put(UpdateProfileController());
   }
-
 }

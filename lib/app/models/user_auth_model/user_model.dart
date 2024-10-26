@@ -1,4 +1,4 @@
-class SignUpDataModel {
+class UserModel {
   String? email;
   String? firstName;
   String? lastName;
@@ -7,16 +7,17 @@ class SignUpDataModel {
   String? createdDate;
   String? sId;
 
-  SignUpDataModel(
-      {this.email,
-        this.firstName,
-        this.lastName,
-        this.mobile,
-        this.password,
-        this.createdDate,
-        this.sId});
+  UserModel({
+    this.email,
+    this.firstName,
+    this.lastName,
+    this.mobile,
+    this.password,
+    this.createdDate,
+    this.sId,
+  });
 
-  SignUpDataModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     firstName = json['firstName'];
     lastName = json['lastName'];
