@@ -53,7 +53,7 @@ class _CompletedTaskListViewState extends State<CompletedTaskListView> {
         },
         child: GetBuilder<CompletedTaskController>(
             builder: (completedTaskController) {
-          if (completedTaskController.inProgress) {
+          if (!completedTaskController.inProgress) {
             return const CenteredProgressIndicator();
           }
           return Visibility(

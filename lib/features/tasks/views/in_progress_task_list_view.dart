@@ -53,7 +53,7 @@ class _InProgressTaskListViewState extends State<InProgressTaskListView> {
         },
         child: GetBuilder<InProgressTaskController>(
             builder: (inProgressTaskController) {
-          if (inProgressTaskController.inProgress) {
+          if (!inProgressTaskController.inProgress) {
             return const CenteredProgressIndicator();
           }
           return Visibility(

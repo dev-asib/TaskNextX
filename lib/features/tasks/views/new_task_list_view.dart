@@ -66,7 +66,7 @@ class _NewTaskListViewState extends State<NewTaskListView> {
           _initialCall();
         },
         child: GetBuilder<NewTaskController>(builder: (newTaskController) {
-          if (newTaskController.inProgress) {
+          if (!newTaskController.inProgress) {
             return const CenteredProgressIndicator();
           }
           return Visibility(
@@ -91,7 +91,7 @@ class _NewTaskListViewState extends State<NewTaskListView> {
     return GetBuilder<TaskCountByStatusController>(
         builder: (taskCountByStatusController) {
       return Visibility(
-        visible: !taskCountByStatusController.inProgress,
+        visible: taskCountByStatusController.inProgress,
         replacement: const CenteredProgressIndicator(),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
