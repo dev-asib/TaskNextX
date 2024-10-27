@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_next_x/app/controllers/connectivity_controller/connectivity_controller.dart';
-import 'package:task_next_x/app/utils/helpers/alert_helper.dart';
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';
@@ -17,35 +16,36 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  final ConnectivityController _connectivityController =
+      Get.find<ConnectivityController>();
+
   Future<void> _moveToNextView() async {
-    while (!Get.find<ConnectivityController>().isDeviceConnected) {
-      await Future.delayed(const Duration(seconds: 3));
+    while (!_connectivityController.isDeviceConnected.value) {
+      await Future.delayed(const Duration(seconds: 1));
     }
 
     try {
       bool isLoggedIn =
-      await Get.find<AuthControllerServices>().checkAuthState();
+          await Get.find<AuthControllerServices>().checkAuthState();
 
       Future.delayed(
         const Duration(seconds: 3),
-            () => Get.offAllNamed(
+        () => Get.offAllNamed(
           isLoggedIn ? RoutesName.bottomNavMainView : RoutesName.signInView,
         ),
       );
     } catch (e) {
-      AlertHelper.showFlushBarMessage(
-        title: "Warning",
-        message: "Error during navigation",
-        isError: true,
-      );
+      debugPrint("Error during navigation: $e");
     }
   }
 
   @override
   void initState() {
     super.initState();
-    _moveToNextView();
-    Get.find<AuthControllerServices>().getProfilePhoto();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _moveToNextView();
+      Get.find<AuthControllerServices>().getProfilePhoto();
+    });
   }
 
   @override

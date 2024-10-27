@@ -3,32 +3,26 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:task_next_x/app/widgets/internet_status_dialog_box.dart';
-import 'package:task_next_x/resources/constants/routes/routes_name.dart';
+import 'package:task_next_x/app/utils/helpers/internet_status_dialog_box.dart';
 
 class ConnectivityController extends GetxController {
   late StreamSubscription _streamSubscription;
-  bool isDeviceConnected = false;
-  bool isAlert = false;
-
-  @override
-  void onInit() {
-    super.onInit();
-    _checkConnectivity();
-  }
+  RxBool isDeviceConnected = false.obs;
+  RxBool isAlert = false.obs;
 
   void _checkConnectivity() {
     try {
       _streamSubscription = Connectivity().onConnectivityChanged.listen(
         (result) async {
           try {
-            isDeviceConnected = await InternetConnectionChecker().hasConnection;
-            if (!isDeviceConnected && !isAlert) {
+            isDeviceConnected.value =
+                await InternetConnectionChecker().hasConnection;
+            if (!isDeviceConnected.value && !isAlert.value) {
               internetStatusDialogBox(_handleRetry);
-              isAlert = true;
-            } else if (isDeviceConnected) {
-              isAlert = false;
-              Get.offNamed(RoutesName.bottomNavMainView);
+
+              isAlert.value = true;
+            } else if (isDeviceConnected.value) {
+              isAlert.value = false;
             }
           } catch (e) {
             debugPrint("Error checking internet connection: $e");
@@ -40,16 +34,22 @@ class ConnectivityController extends GetxController {
     }
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkConnectivity();
+    });
+  }
+
   void _handleRetry() async {
     try {
       Get.back();
-      isDeviceConnected = await InternetConnectionChecker().hasConnection;
-      if (!isDeviceConnected) {
+      isDeviceConnected.value = await InternetConnectionChecker().hasConnection;
+      if (!isDeviceConnected.value) {
         internetStatusDialogBox(_handleRetry);
       } else {
-        isAlert = false;
-
-        Get.offNamed(RoutesName.bottomNavMainView);
+        isAlert.value = false;
       }
     } catch (e) {
       debugPrint("Error during retry internet connection check: $e");

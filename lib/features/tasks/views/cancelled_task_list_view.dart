@@ -55,7 +55,7 @@ class _CancelledTaskListViewState extends State<CancelledTaskListView> {
         },
         child: GetBuilder<CancelledTaskController>(
             builder: (cancelledTaskController) {
-              if (!cancelledTaskController.inProgress) {
+              if (cancelledTaskController.inProgress) {
                 return const CenteredProgressIndicator();
               }
               return Visibility(
