@@ -28,7 +28,7 @@ AppBar profileAppBar(BuildContext context) {
                     ? Image.memory(
                   base64Decode(
                       authControllerServices.encodedProfilePhoto),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 )
                     : const Icon(Icons.person),
               ),

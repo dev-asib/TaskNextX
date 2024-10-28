@@ -7,6 +7,7 @@ import 'package:task_next_x/resources/constants/routes/app_routes.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 import 'package:task_next_x/resources/themes/dark_shade_app_themes.dart';
 import 'package:task_next_x/resources/themes/light_shade_app_themes.dart';
+import 'package:device_preview/device_preview.dart';
 
 class TaskNextX extends StatefulWidget {
   const TaskNextX({super.key});
@@ -31,6 +32,9 @@ class _TaskNextXState extends State<TaskNextX> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return GetMaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       initialBinding: AllBindings(),
       navigatorKey: TaskNextX.navigatorKey,
       initialRoute: RoutesName.splashView,

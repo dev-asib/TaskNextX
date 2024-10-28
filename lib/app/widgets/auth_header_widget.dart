@@ -14,6 +14,7 @@ class AuthHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: textTheme.titleLarge),
         if (subTitle != null && subTitle!.isNotEmpty)
@@ -25,3 +26,4 @@ class AuthHeaderWidget extends StatelessWidget {
     );
   }
 }
+

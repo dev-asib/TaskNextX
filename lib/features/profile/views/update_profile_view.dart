@@ -59,7 +59,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                   SizedBox(height: SizeConfig.screenHeight! * 0.0389),
                   const AuthHeaderWidget(title: "Update Profile"),
                   SizedBox(height: SizeConfig.screenHeight! * 0.03),
-                  PhotoPickerWidget(),
+                  const PhotoPickerWidget(),
                   SizedBox(height: SizeConfig.screenHeight! * 0.01),
                   UpdateProfileViewWidget(
                     formKey: _formKey,

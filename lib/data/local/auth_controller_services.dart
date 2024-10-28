@@ -30,7 +30,7 @@ class AuthControllerServices extends GetxController {
   Future<void> saveUserAccessToken(String token) async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       await sharedPreferences.setString(_accessTokenKey, token);
       _accessToken = token;
       update();
@@ -42,7 +42,7 @@ class AuthControllerServices extends GetxController {
   Future<void> getUserAccessToken() async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       _accessToken = sharedPreferences.getString(_accessTokenKey) ?? '';
       update();
     } catch (e) {
@@ -53,7 +53,7 @@ class AuthControllerServices extends GetxController {
   Future<void> saveUserData(UserModel user) async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       await sharedPreferences.setString(
           _userDataKey, jsonEncode(user.toJson()));
       _userData = user;
@@ -66,7 +66,7 @@ class AuthControllerServices extends GetxController {
   Future<UserModel?> getUserData() async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       String? data = sharedPreferences.getString(_userDataKey);
 
       if (data == null) return null;
@@ -83,7 +83,7 @@ class AuthControllerServices extends GetxController {
   Future<void> saveVerificationEmail(String email) async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       sharedPreferences.setString(_verificationEmailKey, email);
       _verificationEmail = email;
       update();
@@ -95,7 +95,7 @@ class AuthControllerServices extends GetxController {
   Future<void> getVerificationEmail() async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       _verificationEmail =
           sharedPreferences.getString(_verificationEmailKey) ?? '';
       update();
@@ -107,7 +107,7 @@ class AuthControllerServices extends GetxController {
   Future<void> saveVerifyOtp(String otp) async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       sharedPreferences.setString(_verifyOtpKey, otp);
       _verifyOtp = otp;
       update();
@@ -119,7 +119,7 @@ class AuthControllerServices extends GetxController {
   Future<void> getVerifyOtp() async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       _verifyOtp = sharedPreferences.getString(_verifyOtpKey) ?? '';
       update();
     } catch (e) {
@@ -130,7 +130,7 @@ class AuthControllerServices extends GetxController {
   Future<void> saveEncodedProfilePhoto(String encodedPhoto) async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       await sharedPreferences.setString(_profilePhotoKey, encodedPhoto);
       _encodedProfilePhoto = encodedPhoto;
       update();
@@ -141,8 +141,10 @@ class AuthControllerServices extends GetxController {
 
   Future<void> getProfilePhoto() async {
     try {
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      _encodedProfilePhoto = sharedPreferences.getString(_profilePhotoKey) ?? '';
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      _encodedProfilePhoto =
+          sharedPreferences.getString(_profilePhotoKey) ?? '';
       update();
     } catch (e) {
       debugPrint("Error receiving profile photo: $e");
@@ -152,13 +154,12 @@ class AuthControllerServices extends GetxController {
   Future<void> clearAllData() async {
     try {
       SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
       await sharedPreferences.clear();
       _accessToken = '';
       _userData = null;
       _verificationEmail = '';
       _verifyOtp = '';
-      _encodedProfilePhoto = '';
       update();
     } catch (e) {
       debugPrint("Error clearing all data: $e");

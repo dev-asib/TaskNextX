@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task_next_x/app/controllers/connectivity_controller/connectivity_controller.dart';
+import 'package:task_next_x/app/controllers/connectivity_controllers/connectivity_controller.dart';
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';

@@ -40,6 +40,7 @@ class _AddNewTaskViewState extends State<AddNewTaskView> {
             child: Padding(
               padding: EdgeInsets.all(SizeConfig.screenWidth! * 0.06),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: SizeConfig.screenHeight! * 0.0389),
                   const AuthHeaderWidget(title: "Add New Task"),

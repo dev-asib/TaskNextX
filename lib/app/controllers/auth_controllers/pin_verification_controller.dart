@@ -37,8 +37,8 @@ class PinVerificationController extends GetxController {
     if (response.isSuccess && response.responseBody['status'] == 'success') {
       final AuthControllerServices authControllerServices =
           Get.find<AuthControllerServices>();
-     await authControllerServices.saveVerifyOtp(otp);
-     await authControllerServices.saveVerificationEmail(email);
+      await authControllerServices.saveVerifyOtp(otp);
+      await authControllerServices.saveVerificationEmail(email);
 
       _errorMessage = null;
       isSuccess = true;

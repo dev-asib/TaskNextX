@@ -21,7 +21,7 @@ class _NewTaskListViewState extends State<NewTaskListView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _initialCall();
     });
   }
@@ -71,7 +71,9 @@ class _NewTaskListViewState extends State<NewTaskListView> {
           }
           return Visibility(
             visible: newTaskController.newTaskList.isEmpty == false,
-            replacement: const EmptyTaskWidget(title: "New task not found.",),
+            replacement: const EmptyTaskWidget(
+              title: "New task not found.",
+            ),
             child: ListView.builder(
               itemCount: newTaskController.newTaskList.length,
               itemBuilder: (context, index) {
@@ -96,7 +98,8 @@ class _NewTaskListViewState extends State<NewTaskListView> {
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: taskCountByStatusController.taskCountByStatusList.map((e) {
+            children:
+                taskCountByStatusController.taskCountByStatusList.map((e) {
               return TaskSummaryCard(
                 taskTitle: (e.sId ?? "Unknown").toUpperCase(),
                 taskCount: (e.sum.toString()),

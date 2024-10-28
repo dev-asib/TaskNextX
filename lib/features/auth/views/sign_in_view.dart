@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/app/controllers/auth_controllers/sign_in_controller.dart';
 import 'package:task_next_x/app/utils/helpers/alert_helper.dart';
@@ -25,35 +26,41 @@ class _SignInViewState extends State<SignInView> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+
   @override
   Widget build(BuildContext context) {
     final bool isBrightness = Theme.of(context).brightness == Brightness.light;
-
-    return BackgroundWidget(
-      child: Scaffold(
-        backgroundColor: isBrightness
-            ? LightShadeAppColors.secondaryScaffoldBackgroundColor
-            : DarkShadeAppColors.secondaryScaffoldBackgroundColor,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(SizeConfig.screenWidth! * 0.06),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: SizeConfig.screenHeight! * 0.12),
-                  const AuthHeaderWidget(title: "Get Started With"),
-                  SizedBox(height: SizeConfig.screenHeight! * 0.03),
-                  SignInFormWidget(
-                    formKey: _formKey,
-                    emailTEController: _emailTEController,
-                    passwordTEController: _passwordTEController,
-                  ),
-                  SizedBox(height: SizeConfig.screenHeight! * 0.02),
-                  _buildSignInButton(),
-                  SizedBox(height: SizeConfig.screenHeight! * 0.04),
-                  _signInFooter(context)
-                ],
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (dipPop, result){
+        SystemNavigator.pop();
+      },
+      child: BackgroundWidget(
+        child: Scaffold(
+          backgroundColor: isBrightness
+              ? LightShadeAppColors.secondaryScaffoldBackgroundColor
+              : DarkShadeAppColors.secondaryScaffoldBackgroundColor,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(SizeConfig.screenWidth! * 0.06),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: SizeConfig.screenHeight! * 0.12),
+                    const AuthHeaderWidget(title: "Get Started With"),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.03),
+                    SignInFormWidget(
+                      formKey: _formKey,
+                      emailTEController: _emailTEController,
+                      passwordTEController: _passwordTEController,
+                    ),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.02),
+                    _buildSignInButton(),
+                    SizedBox(height: SizeConfig.screenHeight! * 0.04),
+                    _signInFooter(context)
+                  ],
+                ),
               ),
             ),
           ),

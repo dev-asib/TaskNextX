@@ -3,7 +3,7 @@ import 'package:task_next_x/app/bindings/auth_binding.dart';
 import 'package:task_next_x/app/bindings/profile_binding.dart';
 import 'package:task_next_x/app/bindings/tasks_binding.dart';
 import 'package:logger/logger.dart';
-import 'package:task_next_x/app/controllers/connectivity_controller/connectivity_controller.dart';
+import 'package:task_next_x/app/controllers/connectivity_controllers/connectivity_controller.dart';
 import 'package:task_next_x/app/services/logger_service.dart';
 import 'package:task_next_x/app/services/network_services.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';
@@ -28,5 +28,6 @@ class AllBindings extends Bindings {
 
     // ConnectivityController
     Get.put(ConnectivityController());
+
   }
 }

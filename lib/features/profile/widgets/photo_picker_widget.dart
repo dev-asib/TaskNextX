@@ -55,7 +55,7 @@ class PhotoPickerWidget extends StatelessWidget {
               Expanded(
                 child: Text(
                   updateProfileController.selectedImage != null
-                      ? updateProfileController.selectedImage.toString()
+                      ? updateProfileController.selectedImage!.path
                       : "No image selected",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
