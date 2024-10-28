@@ -6,6 +6,7 @@ import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
+import 'package:task_next_x/resources/constants/assets_paths.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
 AppBar profileAppBar(BuildContext context) {
@@ -17,21 +18,18 @@ AppBar profileAppBar(BuildContext context) {
     title: GestureDetector(
       onTap: _onTapAbbBarProfile,
       child:
-      GetBuilder<AuthControllerServices>(builder: (authControllerServices) {
+          GetBuilder<AuthControllerServices>(builder: (authControllerServices) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: authControllerServices.encodedProfilePhoto.isNotEmpty
-                    ? Image.memory(
-                  base64Decode(
-                      authControllerServices.encodedProfilePhoto),
-                  fit: BoxFit.cover,
-                )
-                    : const Icon(Icons.person),
-              ),
+              backgroundColor: Colors.white,
+              backgroundImage: authControllerServices
+                      .encodedProfilePhoto.isNotEmpty
+                  ? MemoryImage(
+                      base64Decode(authControllerServices.encodedProfilePhoto),
+                    )
+                  : const AssetImage(AssetsPaths.profile),
             ),
             SizedBox(width: SizeConfig.screenWidth! * 0.0194),
             Column(
@@ -73,7 +71,7 @@ AppBar profileAppBar(BuildContext context) {
 
 void _onTapAbbBarProfile() {
   final AuthControllerServices authControllerServices =
-  Get.find<AuthControllerServices>();
+      Get.find<AuthControllerServices>();
   Get.toNamed(RoutesName.updateProfileView, arguments: {
     "firstName": authControllerServices.userData!.firstName ?? '',
     "lastName": authControllerServices.userData!.lastName ?? '',

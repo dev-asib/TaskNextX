@@ -7,5 +7,7 @@ class AssetsPaths {
   static const String backgroundSvg = "$_imagesPath/background.svg";
   static const String appLogoSvg = "$_imagesPath/app_logo.svg";
 
+  static const String profile = "$_imagesPath/profile.png";
+
   static const String emptyTask = "$_lottiesPath/empty_task.json";
 }
