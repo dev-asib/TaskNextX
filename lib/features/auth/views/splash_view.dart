@@ -61,7 +61,7 @@ class _SplashViewState extends State<SplashView> {
 
   Widget _buildAppLogo() {
     return SvgPicture.asset(
-      AssetsPaths.taskNextXSvg,
+      AssetsPaths.appLogoSvg,
       width: SizeConfig.screenWidth! * 0.43,
     );
   }
