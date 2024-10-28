@@ -4,8 +4,6 @@ import 'package:task_next_x/app/app/app.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() {
-  // runApp(const TaskNextX());
-
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,

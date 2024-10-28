@@ -13,6 +13,7 @@ class DarkShadeAppColors {
   static const Color greyColor = Colors.grey;
   static const Color redColor = Colors.red;
   static const Color greenColor = Colors.green;
+  static const Color blackColor = Colors.black;
 
   /// Colors for TextFormField
   static const Color textFormFieldFillColor = Colors.white;

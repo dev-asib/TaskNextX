@@ -14,6 +14,7 @@ import 'package:task_next_x/features/tasks/views/cancelled_task_list_view.dart';
 import 'package:task_next_x/features/tasks/views/completed_task_list_view.dart';
 import 'package:task_next_x/features/tasks/views/in_progress_task_list_view.dart';
 import 'package:task_next_x/features/tasks/views/new_task_list_view.dart';
+import 'package:task_next_x/features/tasks/views/task_details_view.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
 class AppRoutes {
@@ -34,6 +35,7 @@ class AppRoutes {
       _getPage(routeName: RoutesName.cancelledTaskListView, page: const CancelledTaskListView()),
       _getPage(routeName: RoutesName.inProgressTaskListView, page: const InProgressTaskListView()),
       _getPage(routeName: RoutesName.addNewTaskListView, page: const AddNewTaskView()),
+      _getPage(routeName: RoutesName.taskDetailsView, page: const TaskDetailsView()),
 
       /// Profile Routes
       _getPage(routeName: RoutesName.updateProfileView, page: const UpdateProfileView()),

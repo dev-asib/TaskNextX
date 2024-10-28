@@ -14,6 +14,7 @@ class RoutesName {
   static const cancelledTaskListView = '/cancelled_task_list_view';
   static const inProgressTaskListView = '/in_progress_task_list_view';
   static const addNewTaskListView = '/add_new_task_view';
+  static const taskDetailsView = '/task_details_view';
 
   ///Routes name for profile view
   static const updateProfileView = '/update_profile_view';

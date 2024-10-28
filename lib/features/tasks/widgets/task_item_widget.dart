@@ -9,6 +9,7 @@ import 'package:task_next_x/app/widgets/centered_progress_indicator.dart';
 import 'package:task_next_x/features/tasks/widgets/pop_up_menu_button_widget.dart';
 import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
+import 'package:task_next_x/resources/constants/routes/routes_name.dart';
 
 class TaskItemWidget extends StatefulWidget {
   const TaskItemWidget({
@@ -39,56 +40,71 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
     final bool isBrightness = Theme.of(context).brightness == Brightness.light;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Card(
-        elevation: 3,
-        color: isBrightness
-            ? LightShadeAppColors.taskItemBackgroundColor
-            : DarkShadeAppColors.taskItemBackgroundColor,
-        child: ListTile(
-          title: Text(
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            widget.taskModel.title ?? 'Unknown Title',
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                widget.taskModel.description ?? 'Unknown Description',
-              ),
-              const SizedBox(height: 8),
-              Text(
-                DateFormatter.formatDate(widget.taskModel.createdDate),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: isBrightness
-                          ? LightShadeAppColors.themeColor
-                          : DarkShadeAppColors.themeColor,
-                    ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Chip(
-                    label: Text(widget.taskModel.status ?? 'New'),
-                  ),
-                  Row(
-                    children: [
-                      _deleteTaskButton(),
-                      UpdateTaskMenuButtonWidget(
-                        taskID: widget.taskModel.sId ?? '',
-                        onUpdate: widget.onUpdate,
+      child: GestureDetector(
+        onTap: _onTapTaskItem,
+        child: Card(
+          elevation: 3,
+          color: isBrightness
+              ? LightShadeAppColors.taskItemBackgroundColor
+              : DarkShadeAppColors.taskItemBackgroundColor,
+          child: ListTile(
+            title: Text(
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              widget.taskModel.title ?? 'Unknown Title',
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  widget.taskModel.description ?? 'Unknown Description',
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  DateFormatter.formatDate(widget.taskModel.createdDate),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: isBrightness
+                            ? LightShadeAppColors.themeColor
+                            : DarkShadeAppColors.themeColor,
                       ),
-                    ],
-                  ),
-                ],
-              )
-            ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Chip(
+                      label: Text(widget.taskModel.status ?? 'New'),
+                    ),
+                    Row(
+                      children: [
+                        _deleteTaskButton(),
+                        UpdateTaskMenuButtonWidget(
+                          taskID: widget.taskModel.sId ?? '',
+                          onUpdate: widget.onUpdate,
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void _onTapTaskItem() {
+    if (widget.taskModel.title != null &&
+        widget.taskModel.description != null &&
+        widget.taskModel.createdDate != null) {
+      Get.toNamed(RoutesName.taskDetailsView, arguments: {
+        "title": widget.taskModel.title!,
+        "description": widget.taskModel.description!,
+        "date": widget.taskModel.createdDate!,
+      });
+    }
   }
 
   Widget _deleteTaskButton() {
