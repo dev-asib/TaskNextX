@@ -53,16 +53,20 @@ class _SplashViewState extends State<SplashView> {
     return Scaffold(
       body: BackgroundWidget(
         child: Center(
-          child: _buildAppLogo(),
+          // child: _buildAppLogo(),
+          child: SvgPicture.asset(
+            AssetsPaths.taskNextXSvg,
+            width: SizeConfig.screenWidth! * 0.43,
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildAppLogo() {
-    return SvgPicture.asset(
-      AssetsPaths.taskNextXSvg,
-      width: SizeConfig.screenWidth! * 0.43,
-    );
-  }
+  // Widget _buildAppLogo() {
+  //   return SvgPicture.asset(
+  //     AssetsPaths.taskNextXSvg,
+  //     width: SizeConfig.screenWidth! * 0.43,
+  //   );
+  // }
 }
