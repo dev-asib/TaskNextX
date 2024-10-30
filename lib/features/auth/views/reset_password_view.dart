@@ -47,7 +47,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 children: [
                   SizedBox(height: SizeConfig.screenHeight! * 0.12),
                   const AuthHeaderWidget(
-                    title: "Set Password",
+                    title: "Set Your Password",
                     subTitle:
                         "The password must be at least 8 characters long and include letters, numbers and special characters",
                   ),

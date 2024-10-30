@@ -48,7 +48,7 @@ class _SignInViewState extends State<SignInView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: SizeConfig.screenHeight! * 0.12),
-                    const AuthHeaderWidget(title: "Get Started With"),
+                    const AuthHeaderWidget(title: "Get Started With Us"),
                     SizedBox(height: SizeConfig.screenHeight! * 0.03),
                     SignInFormWidget(
                       formKey: _formKey,

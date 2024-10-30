@@ -14,6 +14,13 @@ class LightShadeAppThemes {
       chipTheme: _chipThemeData(),
       listTileTheme: _listTileThemeData(),
       floatingActionButtonTheme: _floatingActionButtonThemeData(),
+      progressIndicatorTheme: _progressIndicatorThemeData(),
+    );
+  }
+
+  ProgressIndicatorThemeData _progressIndicatorThemeData() {
+    return ProgressIndicatorThemeData(
+      color: LightShadeAppColors.themeColor,
     );
   }
 

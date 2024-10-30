@@ -4,8 +4,6 @@ import 'package:task_next_x/app/controllers/connectivity_controllers/connectivit
 import 'package:task_next_x/app/utils/responsive/size_config.dart';
 import 'package:task_next_x/app/widgets/background_widget.dart';
 import 'package:task_next_x/data/local/auth_controller_services.dart';
-import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors.dart';
-import 'package:task_next_x/resources/constants/app_colors/light_shade_app_colors.dart';
 import 'package:task_next_x/resources/constants/assets_paths.dart';
 import 'package:get/get.dart';
 import 'package:task_next_x/resources/constants/routes/routes_name.dart';
@@ -52,7 +50,6 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    bool isBrightness = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
       body: BackgroundWidget(
         child: Padding(
@@ -64,11 +61,7 @@ class _SplashViewState extends State<SplashView> {
                 const Spacer(),
                 _buildAppLogo(),
                 const Spacer(),
-                CircularProgressIndicator(
-                  color: isBrightness
-                      ? LightShadeAppColors.themeColor
-                      : DarkShadeAppColors.themeColor,
-                ),
+                const CircularProgressIndicator(),
                 SizedBox(height: SizeConfig.screenHeight! * 0.01),
                 Text(
                   "Version 1.0.0",

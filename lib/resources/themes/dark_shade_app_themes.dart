@@ -4,7 +4,8 @@ import 'package:task_next_x/resources/constants/app_colors/dark_shade_app_colors
 class DarkShadeAppThemes {
   ThemeData darkThemeData() {
     return ThemeData(
-      scaffoldBackgroundColor: DarkShadeAppColors.primaryScaffoldBackgroundColor,
+      scaffoldBackgroundColor:
+          DarkShadeAppColors.primaryScaffoldBackgroundColor,
       appBarTheme: _appBarTheme(),
       inputDecorationTheme: _inputDecorationTheme(),
       textTheme: _textTheme(),
@@ -14,11 +15,18 @@ class DarkShadeAppThemes {
       chipTheme: _chipThemeData(),
       listTileTheme: _listTileThemeData(),
       floatingActionButtonTheme: _floatingActionButtonThemeData(),
+      progressIndicatorTheme: _progressIndicatorThemeData(),
     );
   }
 
-  FloatingActionButtonThemeData _floatingActionButtonThemeData(){
-    return  FloatingActionButtonThemeData(
+  ProgressIndicatorThemeData _progressIndicatorThemeData() {
+    return ProgressIndicatorThemeData(
+      color: DarkShadeAppColors.themeColor,
+    );
+  }
+
+  FloatingActionButtonThemeData _floatingActionButtonThemeData() {
+    return FloatingActionButtonThemeData(
       elevation: 4,
       backgroundColor: DarkShadeAppColors.floatingActionButtonBackgroundColor,
       foregroundColor: DarkShadeAppColors.floatingActionButtonForegroundColor,
